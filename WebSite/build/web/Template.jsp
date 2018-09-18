@@ -2,6 +2,9 @@
     Created on : 2018-09-13, 09:53:50
     Author     : Isaac Fiset and William Lafontaine
 --%>
+<%@page import="java.util.Properties"%>
+<%@page import="java.sql.SQLException"%>
+<%@page import="java.sql.DriverManager"%>
 <%--
 git: 
 --%>
@@ -18,6 +21,44 @@ git:
         <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.3.1/css/all.css" integrity="sha384-mzrmE5qonljUremFsqc01SB46JvROS7bZs3IO2EmfFsd15uHvIt+Y8vEf7N7fWAU" crossorigin="anonymous">
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
         <title>Template</title>
+        <%
+            //Server
+            String driver = "com.mysql.cj.jdbc.Driver";
+            String servername = "localhost";
+            String port = "3306";
+            String shema = "bd_guns";
+            String parameter = "?serverTimezone=UTC";
+            String url = "jdbc:mysql://" + servername + ":" + port + "/" + shema + parameter;
+            String username = "root";
+            String password = "t0t0g5wil"; 
+            
+            Properties properties = new Properties();
+            properties.setProperty("user", username);
+            properties.setProperty("password", password);
+            properties.setProperty("useSSL", "false");
+            properties.setProperty("verifyServerCertificate", "true");
+            properties.setProperty("requireSSL", "false");
+        
+            java.sql.Connection conn = null;
+            
+            try{
+                Class.forName(driver).newInstance();
+                conn = DriverManager.getConnection(url, properties);
+            }
+            catch(SQLException e){
+                System.out.println(e);
+                System.exit(-1);
+            }
+            catch(Exception e){
+                System.out.println(e);
+                System.exit(-1);
+            }
+            finally{
+                // Close ResultSet and PreparedStatement
+                conn.close();
+            }
+                            
+        %>
     </head>
     <body>
         

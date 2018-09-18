@@ -3,6 +3,9 @@ package org.apache.jsp;
 import javax.servlet.*;
 import javax.servlet.http.*;
 import javax.servlet.jsp.*;
+import java.util.Properties;
+import java.sql.SQLException;
+import java.sql.DriverManager;
 
 public final class Template_jsp extends org.apache.jasper.runtime.HttpJspBase
     implements org.apache.jasper.runtime.JspSourceDependent {
@@ -41,8 +44,10 @@ public final class Template_jsp extends org.apache.jasper.runtime.HttpJspBase
       _jspx_out = out;
       _jspx_resourceInjector = (org.glassfish.jsp.api.ResourceInjector) application.getAttribute("com.sun.appserv.jsp.resource.injector");
 
-      out.write('\r');
-      out.write('\n');
+      out.write("\r\n");
+      out.write("\r\n");
+      out.write("\r\n");
+      out.write("\r\n");
       out.write("\r\n");
       out.write("\r\n");
       out.write("<!DOCTYPE html>\r\n");
@@ -57,6 +62,46 @@ public final class Template_jsp extends org.apache.jasper.runtime.HttpJspBase
       out.write("        <link rel=\"stylesheet\" href=\"https://use.fontawesome.com/releases/v5.3.1/css/all.css\" integrity=\"sha384-mzrmE5qonljUremFsqc01SB46JvROS7bZs3IO2EmfFsd15uHvIt+Y8vEf7N7fWAU\" crossorigin=\"anonymous\">\r\n");
       out.write("        <meta http-equiv=\"Content-Type\" content=\"text/html; charset=UTF-8\">\r\n");
       out.write("        <title>Template</title>\r\n");
+      out.write("        ");
+
+            //Server
+            String driver = "com.mysql.cj.jdbc.Driver";
+            String servername = "localhost";
+            String port = "3306";
+            String shema = "bd_guns";
+            String parameter = "?serverTimezone=UTC";
+            String url = "jdbc:mysql://" + servername + ":" + port + "/" + shema + parameter;
+            String username = "root";
+            String password = "t0t0g5wil"; 
+            
+            Properties properties = new Properties();
+            properties.setProperty("user", username);
+            properties.setProperty("password", password);
+            properties.setProperty("useSSL", "false");
+            properties.setProperty("verifyServerCertificate", "true");
+            properties.setProperty("requireSSL", "false");
+        
+            java.sql.Connection conn = null;
+            
+            try{
+                Class.forName(driver).newInstance();
+                conn = DriverManager.getConnection(url, properties);
+            }
+            catch(SQLException e){
+                System.out.println(e);
+                System.exit(-1);
+            }
+            catch(Exception e){
+                System.out.println(e);
+                System.exit(-1);
+            }
+            finally{
+                // Close ResultSet and PreparedStatement
+                conn.close();
+            }
+                            
+        
+      out.write("\r\n");
       out.write("    </head>\r\n");
       out.write("    <body>\r\n");
       out.write("        \r\n");
