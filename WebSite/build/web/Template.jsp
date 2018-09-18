@@ -13,6 +13,9 @@ git:
         <script src="../js/libs/jquery/jquery.js"></script>
         <link rel="stylesheet" href="./Css/Default.css">
         <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+        <style>
+            #navBarSearchForm input[type=text]{width:430px !important;}
+        </style>
         <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.3.1/css/all.css" integrity="sha384-mzrmE5qonljUremFsqc01SB46JvROS7bZs3IO2EmfFsd15uHvIt+Y8vEf7N7fWAU" crossorigin="anonymous">
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
         <title>Template</title>
@@ -30,9 +33,9 @@ git:
                     <li><a href="Pistol.jsp">Pistol</a></li>
                     <li><a href="./Jsp/Kids.jsp">Kids</a></li>
                 </ul>
-                <form class="navbar-form navbar-right" action="/action_page.php">
+                <form class="navbar-form navbar-right" action="/action_page.php" id="navBarSearchForm">
                   <div class="input-group">
-                    <input type="text" class="form-control" placeholder="Search" name="search">
+                    <input type="text" class="form-control" placeholder="Recherche d'une arme à feu" name="search">
                     <div class="input-group-btn">
                       <button class="btn btn-default" type="submit">
                         <i class="glyphicon glyphicon-search"></i>
@@ -50,9 +53,10 @@ git:
                 
                 <section class="col-xs-12 col-sm-12 col-md-8 col-lg-7">
                     <article class="panel panel-default" style="width:100%">
-                      <div class="panel-heading">Panel with panel-default class</div>
+                      <div class="panel-heading">Recherche</div>
                       <div class="panel-body">
-                          <table class="table">
+                          <h4>Toutes les armes</h4>
+                          <table class="table" id="table-data">
                             <thead>
                               <tr>
                                 <th scope="col">#</th>
@@ -88,9 +92,10 @@ git:
                 
                 <aside class="col-xs-12 col-sm-12 col-md-4 col-lg-5">
                     <article class="panel panel-default">
-                        <div class="panel-heading">Image</div>
+                        <div class="panel-heading">Image de l'arme à feu</div>
                         <div class="panel-body">
-                            <img src="./img/gun.jpg" class="img-fluid" alt="Erreur du chargement de l'image">
+                            <h4>AK-47</h4>
+                            <img id="img-data" src="./img/gun.jpg" class="img-fluid" alt="Erreur du chargement de l'image">
                         </div>
                     </article>                    
                 </aside>

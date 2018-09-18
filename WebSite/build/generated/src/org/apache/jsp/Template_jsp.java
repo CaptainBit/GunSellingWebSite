@@ -52,6 +52,9 @@ public final class Template_jsp extends org.apache.jasper.runtime.HttpJspBase
       out.write("        <script src=\"../js/libs/jquery/jquery.js\"></script>\r\n");
       out.write("        <link rel=\"stylesheet\" href=\"./Css/Default.css\">\r\n");
       out.write("        <link rel=\"stylesheet\" href=\"https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css\">\r\n");
+      out.write("        <style>\r\n");
+      out.write("            #navBarSearchForm input[type=text]{width:430px !important;}\r\n");
+      out.write("        </style>\r\n");
       out.write("        <link rel=\"stylesheet\" href=\"https://use.fontawesome.com/releases/v5.3.1/css/all.css\" integrity=\"sha384-mzrmE5qonljUremFsqc01SB46JvROS7bZs3IO2EmfFsd15uHvIt+Y8vEf7N7fWAU\" crossorigin=\"anonymous\">\r\n");
       out.write("        <meta http-equiv=\"Content-Type\" content=\"text/html; charset=UTF-8\">\r\n");
       out.write("        <title>Template</title>\r\n");
@@ -69,9 +72,9 @@ public final class Template_jsp extends org.apache.jasper.runtime.HttpJspBase
       out.write("                    <li><a href=\"Pistol.jsp\">Pistol</a></li>\r\n");
       out.write("                    <li><a href=\"./Jsp/Kids.jsp\">Kids</a></li>\r\n");
       out.write("                </ul>\r\n");
-      out.write("                <form class=\"navbar-form navbar-right\" action=\"/action_page.php\">\r\n");
+      out.write("                <form class=\"navbar-form navbar-right\" action=\"/action_page.php\" id=\"navBarSearchForm\">\r\n");
       out.write("                  <div class=\"input-group\">\r\n");
-      out.write("                    <input type=\"text\" class=\"form-control\" placeholder=\"Search\" name=\"search\">\r\n");
+      out.write("                    <input type=\"text\" class=\"form-control\" placeholder=\"Recherche d'une arme à feu\" name=\"search\">\r\n");
       out.write("                    <div class=\"input-group-btn\">\r\n");
       out.write("                      <button class=\"btn btn-default\" type=\"submit\">\r\n");
       out.write("                        <i class=\"glyphicon glyphicon-search\"></i>\r\n");
@@ -89,9 +92,10 @@ public final class Template_jsp extends org.apache.jasper.runtime.HttpJspBase
       out.write("                \r\n");
       out.write("                <section class=\"col-xs-12 col-sm-12 col-md-8 col-lg-7\">\r\n");
       out.write("                    <article class=\"panel panel-default\" style=\"width:100%\">\r\n");
-      out.write("                      <div class=\"panel-heading\">Panel with panel-default class</div>\r\n");
+      out.write("                      <div class=\"panel-heading\">Recherche</div>\r\n");
       out.write("                      <div class=\"panel-body\">\r\n");
-      out.write("                          <table class=\"table\">\r\n");
+      out.write("                          <h4>Toutes les armes</h4>\r\n");
+      out.write("                          <table class=\"table\" id=\"table-data\">\r\n");
       out.write("                            <thead>\r\n");
       out.write("                              <tr>\r\n");
       out.write("                                <th scope=\"col\">#</th>\r\n");
@@ -127,9 +131,10 @@ public final class Template_jsp extends org.apache.jasper.runtime.HttpJspBase
       out.write("                \r\n");
       out.write("                <aside class=\"col-xs-12 col-sm-12 col-md-4 col-lg-5\">\r\n");
       out.write("                    <article class=\"panel panel-default\">\r\n");
-      out.write("                        <div class=\"panel-heading\">Image</div>\r\n");
+      out.write("                        <div class=\"panel-heading\">Image de l'arme à feu</div>\r\n");
       out.write("                        <div class=\"panel-body\">\r\n");
-      out.write("                            <img src=\"./img/gun.jpg\" class=\"img-fluid\" alt=\"Erreur du chargement de l'image\">\r\n");
+      out.write("                            <h4>AK-47</h4>\r\n");
+      out.write("                            <img id=\"img-data\" src=\"./img/gun.jpg\" class=\"img-fluid\" alt=\"Erreur du chargement de l'image\">\r\n");
       out.write("                        </div>\r\n");
       out.write("                    </article>                    \r\n");
       out.write("                </aside>\r\n");
