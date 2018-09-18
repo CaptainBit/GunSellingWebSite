@@ -12,52 +12,97 @@ git:
     <head>
         <script src="../js/libs/jquery/jquery.js"></script>
         <link rel="stylesheet" href="./Css/Default.css">
+        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
         <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.3.1/css/all.css" integrity="sha384-mzrmE5qonljUremFsqc01SB46JvROS7bZs3IO2EmfFsd15uHvIt+Y8vEf7N7fWAU" crossorigin="anonymous">
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
         <title>Template</title>
     </head>
     <body>
+        
         <div class="header">
-            <h1>Marchand d'armes</h1>
-            <nav class="navsection">
-                <a href="Homepage.jsp" class="logo"><i class="fas fa-fighter-jet"></i></a>
-                <a href="Rifle.jsp">Rifle</a>
-                <a href="Pistol.jsp">Pistol</a>
-                <a href="./Jsp/Kids.jsp">Kids</a>
-                <div class="search-container">
-                  <form action="/action_page.php">
-                    <input type="text" placeholder="Search.." name="search">
-                    <button type="submit"><i class="fa fa-search"></i></button>
-                  </form>
+            <nav class="navbar navbar-inverse navbar-fixed-top">
+              <div class="container-fluid">
+                <div class="navbar-header">
+                  <a class="navbar-brand" href="#">Marchand d'armes <i class="fas fa-fighter-jet"></i></a>
                 </div>
-            </nav>
+                <ul class="nav navbar-nav">
+                    <li><a href="Rifle.jsp">Rifle</a></li>
+                    <li><a href="Pistol.jsp">Pistol</a></li>
+                    <li><a href="./Jsp/Kids.jsp">Kids</a></li>
+                </ul>
+                <form class="navbar-form navbar-right" action="/action_page.php">
+                  <div class="input-group">
+                    <input type="text" class="form-control" placeholder="Search" name="search">
+                    <div class="input-group-btn">
+                      <button class="btn btn-default" type="submit">
+                        <i class="glyphicon glyphicon-search"></i>
+                      </button>
+                    </div>
+                  </div>
+                </form>
+              </div>
+            </nav>                            
         </div>  
         
-        <div class="Container">
-            <section class="section-gauche">
-                  <h1>Articles</h1>
-                  <article>
-                        <h1>Titre de l'article</h1>
-                        <p>Contenu de l'article</p>
-                  </article>
-            </section>
-        </div>
-              
-        <div class="Container">
-            <aside class="aside-droite">
-                <h4>Sources de l'article</h4>
-                <ul>
-                  <li><a href="#">Lien 1</a></li>
-                  <li><a href="#">Lien 2</a></li>
-                  <li><a href="#">Lien 3</a></li>
-                </ul>
-            </aside>
+        <div class="container-fluid" style="padding-top: 80px">
+            
+            <div class="row">
+                
+                <section class="col-xs-12 col-sm-12 col-md-8 col-lg-7">
+                    <article class="panel panel-default" style="width:100%">
+                      <div class="panel-heading">Panel with panel-default class</div>
+                      <div class="panel-body">
+                          <table class="table">
+                            <thead>
+                              <tr>
+                                <th scope="col">#</th>
+                                <th scope="col">First</th>
+                                <th scope="col">Last</th>
+                                <th scope="col">Handle</th>
+                              </tr>
+                            </thead>
+                            <tbody>
+                              <tr>
+                                <th scope="row">1</th>
+                                <td>Mark</td>
+                                <td>Otto</td>
+                                <td>@mdo</td>
+                              </tr>
+                              <tr>
+                                <th scope="row">2</th>
+                                <td>Jacob</td>
+                                <td>Thornton</td>
+                                <td>@fat</td>
+                              </tr>
+                              <tr>
+                                <th scope="row">3</th>
+                                <td>Larry</td>
+                                <td>the Bird</td>
+                                <td>@twitter</td>
+                              </tr>
+                            </tbody>
+                          </table>
+                      </div>
+                    </article>
+                </section>
+                
+                <aside class="col-xs-12 col-sm-12 col-md-4 col-lg-5">
+                    <article class="panel panel-default">
+                        <div class="panel-heading">Image</div>
+                        <div class="panel-body">
+                            <img src="./img/gun.jpg" class="img-fluid" alt="Erreur du chargement de l'image">
+                        </div>
+                    </article>                    
+                </aside>
+                
+            </div>   
+            
         </div>
         
         <div class="footer">
-            <h5>Application web développée et programmée par </h5>            
-            <h5><strong>William Lafontaine</strong> et <strong>Isaac Fiset</strong></h5>
-            <h6>Étudiants programmeurs remarquables</h6>
+            <div class="footer-copyright text-center py-3">
+                Application web développée et programmée par William Lafontaine et Isaac Fiset            
+            </div>
         </div>
         
     </body>
