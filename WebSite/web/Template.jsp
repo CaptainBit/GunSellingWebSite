@@ -10,8 +10,7 @@ git:
 <html>
     
     <head>
-        <script src="../js/libs/jquery/jquery.js"></script>
-        <link rel="stylesheet" href="./Css/Default.css">
+        <script src="./js/libs/jquery/jquery.js"></script>
         <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
         <style>
             #navBarSearchForm input[type=text]{width:430px !important;}
@@ -29,9 +28,9 @@ git:
                   <a class="navbar-brand" href="#">Marchand d'armes <i class="fas fa-fighter-jet"></i></a>
                 </div>
                 <ul class="nav navbar-nav">
-                    <li><a href="Rifle.jsp">Rifle</a></li>
-                    <li><a href="Pistol.jsp">Pistol</a></li>
-                    <li><a href="./Jsp/Kids.jsp">Kids</a></li>
+                    <li><a href="#" onclick="ChangerTable('Rifle')">Rifle</a></li>
+                    <li><a href="#" onclick="ChangerTable('Pistol')">Pistol</a></li>
+                    <li><a href="#" onclick="ChangerTable('Kids')">Kids</a></li>
                 </ul>
                 <form class="navbar-form navbar-right" action="/action_page.php" id="navBarSearchForm">
                   <div class="input-group">
@@ -55,36 +54,8 @@ git:
                     <article class="panel panel-default" style="width:100%">
                       <div class="panel-heading">Recherche</div>
                       <div class="panel-body">
-                          <h4>Toutes les armes</h4>
+                          <h4 id="table-nom">Toutes les armes</h4>
                           <table class="table" id="table-data">
-                            <thead>
-                              <tr>
-                                <th scope="col">#</th>
-                                <th scope="col">First</th>
-                                <th scope="col">Last</th>
-                                <th scope="col">Handle</th>
-                              </tr>
-                            </thead>
-                            <tbody>
-                              <tr>
-                                <th scope="row">1</th>
-                                <td>Mark</td>
-                                <td>Otto</td>
-                                <td>@mdo</td>
-                              </tr>
-                              <tr>
-                                <th scope="row">2</th>
-                                <td>Jacob</td>
-                                <td>Thornton</td>
-                                <td>@fat</td>
-                              </tr>
-                              <tr>
-                                <th scope="row">3</th>
-                                <td>Larry</td>
-                                <td>the Bird</td>
-                                <td>@twitter</td>
-                              </tr>
-                            </tbody>
                           </table>
                       </div>
                     </article>
@@ -110,5 +81,47 @@ git:
             </div>
         </div>
         
+        <script>
+            function ChangerTable(nom){
+                $("#table-nom").text(nom);
+                $('#table-data').html("\
+                        <thead>\
+                              <tr>\
+                                <th scope='col'>#</th>\
+                                <th scope=col'>First</th>\
+                                <th scope=col'>Last</th>\
+                                <th scope=col'>Handle</th>\
+                              </tr>\
+                            </thead>\
+                            <tbody>\
+                              <tr>\
+                                <th scope='row'>1</th>\
+                                <td>Mark</td>\
+                                <td>Otto</td>\
+                                <td>@mdo</td>\
+                              </tr>\
+                              <tr>\
+                                <th scope='row'>2</th>\
+                                <td>Jacob</td>\
+                                <td>Thornton</td>\
+                                <td>@fat</td>\
+                              </tr>\
+                              <tr>\
+                                <th scope='row'>3</th>\
+                                <td>Larry</td>\
+                                <td>the Bird</td>\
+                                <td>@twitter</td>\
+                              </tr>\
+                            </tbody>\
+                            ");
+                /*
+                $.post()"getData",nom,function(data){
+                    console.log("post success");
+                    //post to table in html
+                });
+                */
+            }
+        </script>        
+        
     </body>
-</html>
+</html>    
