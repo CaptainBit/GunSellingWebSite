@@ -25,7 +25,7 @@ git:
             <nav class="navbar navbar-inverse navbar-fixed-top">
               <div class="container-fluid">
                 <div class="navbar-header">
-                  <a class="navbar-brand" href="#">Marchand d'armes <i class="fas fa-fighter-jet"></i></a>
+                  <a class="navbar-brand" onclick="ChangerTable('Toutes les armes à feu')" href="#">Marchand d'armes <i class="fas fa-fighter-jet"></i></a>
                 </div>
                 <ul class="nav navbar-nav">
                     <li><a href="#" onclick="ChangerTable('Rifle')">Rifle</a></li>
@@ -54,8 +54,8 @@ git:
                     <article class="panel panel-default" style="width:100%">
                       <div class="panel-heading">Recherche</div>
                       <div class="panel-body">
-                          <h4 id="table-nom">Toutes les armes</h4>
-                          <table class="table" id="table-data">
+                          <h4 id="table-nom">Toutes les armes à feu</h4>
+                          <table class="table table-hover" id="table-data">
                           </table>
                       </div>
                     </article>
@@ -65,8 +65,8 @@ git:
                     <article class="panel panel-default">
                         <div class="panel-heading">Image de l'arme à feu</div>
                         <div class="panel-body">
-                            <h4>AK-47</h4>
-                            <img id="img-data" src="./img/gun.jpg" class="img-fluid" alt="Erreur du chargement de l'image">
+                            <h4 id="img-nom">AK-47</h4>
+                            <img id="img-data" src="./img/pistol.jpg" class="img-fluid" alt="Erreur du chargement de l'image">
                         </div>
                     </article>                    
                 </aside>
@@ -82,45 +82,60 @@ git:
         </div>
         
         <script>
-            function ChangerTable(nom){
-                $("#table-nom").text(nom);
-                $('#table-data').html("\
-                        <thead>\
-                              <tr>\
-                                <th scope='col'>#</th>\
-                                <th scope=col'>First</th>\
-                                <th scope=col'>Last</th>\
-                                <th scope=col'>Handle</th>\
-                              </tr>\
-                            </thead>\
-                            <tbody>\
-                              <tr>\
-                                <th scope='row'>1</th>\
-                                <td>Mark</td>\
-                                <td>Otto</td>\
-                                <td>@mdo</td>\
-                              </tr>\
-                              <tr>\
-                                <th scope='row'>2</th>\
-                                <td>Jacob</td>\
-                                <td>Thornton</td>\
-                                <td>@fat</td>\
-                              </tr>\
-                              <tr>\
-                                <th scope='row'>3</th>\
-                                <td>Larry</td>\
-                                <td>the Bird</td>\
-                                <td>@twitter</td>\
-                              </tr>\
-                            </tbody>\
-                            ");
+        function ChangerTable(nom){
+            $("#table-nom").text(nom);
+            $('#table-data').html("\
+                    <thead>\
+                          <tr>\
+                            <th scope='col'>#</th>\
+                            <th scope=col'>Description</th>\
+                            <th scope=col'>Type</th>\
+                          </tr>\
+                        </thead>\
+                        <tbody>\
+                          <tr onclick='ChangerImage(1)'>\
+                            <th scope='row'>1</th>\
+                            <td>Uzi</td>\
+                            <td>Kids</td>\
+                          </tr>\
+                          <tr onclick='ChangerImage(2)'>\
+                            <th scope='row'>2</th>\
+                            <td>Pistol</td>\
+                            <td>Pistol</td>\
+                          </tr>\
+                          <tr onclick='ChangerImage(3)'>\
+                            <th scope='row'>3</th>\
+                            <td>Ak-47</td>\
+                            <td>Rifle</td>\
+                          </tr>\
+                        </tbody>\
+                        ");
+        }
+                
+        function ChangerImage(id){
+            console.log(id);
+            switch(id){
+                case 1:
+                    $('#img-nom').text('uzi');
+                    $('#img-data').attr("src","./img/uzi.jpg");                    
+                    break;
+                case 2: 
+                    $('#img-nom').text('pistol');                    
+                    $('#img-data').attr("src","./img/pistol.jpg");
+                    break;
+                case 3: 
+                    $('#img-nom').text('ak-47');                    
+                    $('#img-data').attr("src","./img/ak-47.jpg");                    
+                    break;
+            }
+        }
                 /*
                 $.post()"getData",nom,function(data){
                     console.log("post success");
                     //post to table in html
                 });
                 */
-            }
+            
         </script>        
         
     </body>
