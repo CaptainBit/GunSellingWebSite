@@ -2,6 +2,8 @@
     Created on : 2018-09-13, 09:53:50
     Author     : Isaac Fiset and William Lafontaine
 --%>
+<%@page import="java.sql.ResultSet"%>
+<%@page import="java.sql.PreparedStatement"%>
 <%@page import="java.util.Properties"%>
 <%@page import="java.sql.SQLException"%>
 <%@page import="java.sql.DriverManager"%>
@@ -21,44 +23,6 @@ git:
         <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.3.1/css/all.css" integrity="sha384-mzrmE5qonljUremFsqc01SB46JvROS7bZs3IO2EmfFsd15uHvIt+Y8vEf7N7fWAU" crossorigin="anonymous">
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
         <title>Template</title>
-        <%
-            //Server
-            String driver = "com.mysql.cj.jdbc.Driver";
-            String servername = "localhost";
-            String port = "3306";
-            String shema = "bd_guns";
-            String parameter = "?serverTimezone=UTC";
-            String url = "jdbc:mysql://" + servername + ":" + port + "/" + shema + parameter;
-            String username = "root";
-            String password = "t0t0g5wil"; 
-            
-            Properties properties = new Properties();
-            properties.setProperty("user", username);
-            properties.setProperty("password", password);
-            properties.setProperty("useSSL", "false");
-            properties.setProperty("verifyServerCertificate", "true");
-            properties.setProperty("requireSSL", "false");
-        
-            java.sql.Connection conn = null;
-            
-            try{
-                Class.forName(driver).newInstance();
-                conn = DriverManager.getConnection(url, properties);
-            }
-            catch(SQLException e){
-                System.out.println(e);
-                System.exit(-1);
-            }
-            catch(Exception e){
-                System.out.println(e);
-                System.exit(-1);
-            }
-            finally{
-                // Close ResultSet and PreparedStatement
-                conn.close();
-            }
-                            
-        %>
     </head>
     <body>
         
@@ -66,12 +30,12 @@ git:
             <nav class="navbar navbar-inverse navbar-fixed-top">
               <div class="container-fluid">
                 <div class="navbar-header">
-                  <a class="navbar-brand" onclick="ChangerTable('Toutes les armes à feu')" href="#">Marchand d'armes <i class="fas fa-fighter-jet"></i></a>
+                  <a class="navbar-brand" onclick="ChangerTable(0)" href="#">Dictionnaire des armes à feu  <i class="fas fa-fighter-jet"></i></a>
                 </div>
                 <ul class="nav navbar-nav">
-                    <li><a href="#" onclick="ChangerTable('Rifle')">Rifle</a></li>
-                    <li><a href="#" onclick="ChangerTable('Pistol')">Pistol</a></li>
-                    <li><a href="#" onclick="ChangerTable('Kids')">Kids</a></li>
+                    <li><a href="#" onclick="ChangerTable(1)">Rifle</a></li>
+                    <li><a href="#" onclick="ChangerTable(2)">Pistol</a></li>
+                    <li><a href="#" onclick="ChangerTable(3)">Kids</a></li>
                 </ul>
                 <form class="navbar-form navbar-right" action="/action_page.php" id="navBarSearchForm">
                   <div class="input-group">
@@ -123,38 +87,33 @@ git:
         </div>
         
         <script>
-        function ChangerTable(nom){
-            $("#table-nom").text(nom);
-            $('#table-data').html("\
-                    <thead>\
-                          <tr>\
-                            <th scope='col'>#</th>\
-                            <th scope=col'>Description</th>\
-                            <th scope=col'>Type</th>\
-                          </tr>\
-                        </thead>\
-                        <tbody>\
-                          <tr onclick='ChangerImage(1)'>\
-                            <th scope='row'>1</th>\
-                            <td>Uzi</td>\
-                            <td>Kids</td>\
-                          </tr>\
-                          <tr onclick='ChangerImage(2)'>\
-                            <th scope='row'>2</th>\
-                            <td>Pistol</td>\
-                            <td>Pistol</td>\
-                          </tr>\
-                          <tr onclick='ChangerImage(3)'>\
-                            <th scope='row'>3</th>\
-                            <td>Ak-47</td>\
-                            <td>Rifle</td>\
-                          </tr>\
-                        </tbody>\
-                        ");
+        $('document').ready(function(){
+            ChangerTable(0);
+        })
+        
+        function ChangerTable(idType){
+            
+            switch(idType){
+                case 0:
+                    $("#table-nom").text("Toute les armes");
+                    break;
+                case 1:
+                    $("#table-nom").text("Rifle");
+                    break;
+                case 2:
+                    $("#table-nom").text("Pistol");
+                    break;
+                case 3:
+                    $("#table-nom").text("Kids");
+                    break;
+            }
+            
+            $.post("./Select.jsp",{"idType":idType},function(data){
+                $('#table-data').html(data);
+            });
         }
                 
         function ChangerImage(id){
-            console.log(id);
             switch(id){
                 case 1:
                     $('#img-nom').text('uzi');
@@ -170,13 +129,6 @@ git:
                     break;
             }
         }
-                /*
-                $.post()"getData",nom,function(data){
-                    console.log("post success");
-                    //post to table in html
-                });
-                */
-            
         </script>        
         
     </body>

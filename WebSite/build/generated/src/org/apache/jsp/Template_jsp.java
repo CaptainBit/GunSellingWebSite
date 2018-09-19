@@ -3,6 +3,8 @@ package org.apache.jsp;
 import javax.servlet.*;
 import javax.servlet.http.*;
 import javax.servlet.jsp.*;
+import java.sql.ResultSet;
+import java.sql.PreparedStatement;
 import java.util.Properties;
 import java.sql.SQLException;
 import java.sql.DriverManager;
@@ -50,6 +52,8 @@ public final class Template_jsp extends org.apache.jasper.runtime.HttpJspBase
       out.write("\r\n");
       out.write("\r\n");
       out.write("\r\n");
+      out.write("\r\n");
+      out.write("\r\n");
       out.write("<!DOCTYPE html>\r\n");
       out.write("<html>\r\n");
       out.write("    \r\n");
@@ -62,46 +66,6 @@ public final class Template_jsp extends org.apache.jasper.runtime.HttpJspBase
       out.write("        <link rel=\"stylesheet\" href=\"https://use.fontawesome.com/releases/v5.3.1/css/all.css\" integrity=\"sha384-mzrmE5qonljUremFsqc01SB46JvROS7bZs3IO2EmfFsd15uHvIt+Y8vEf7N7fWAU\" crossorigin=\"anonymous\">\r\n");
       out.write("        <meta http-equiv=\"Content-Type\" content=\"text/html; charset=UTF-8\">\r\n");
       out.write("        <title>Template</title>\r\n");
-      out.write("        ");
-
-            //Server
-            String driver = "com.mysql.cj.jdbc.Driver";
-            String servername = "localhost";
-            String port = "3306";
-            String shema = "bd_guns";
-            String parameter = "?serverTimezone=UTC";
-            String url = "jdbc:mysql://" + servername + ":" + port + "/" + shema + parameter;
-            String username = "root";
-            String password = "t0t0g5wil"; 
-            
-            Properties properties = new Properties();
-            properties.setProperty("user", username);
-            properties.setProperty("password", password);
-            properties.setProperty("useSSL", "false");
-            properties.setProperty("verifyServerCertificate", "true");
-            properties.setProperty("requireSSL", "false");
-        
-            java.sql.Connection conn = null;
-            
-            try{
-                Class.forName(driver).newInstance();
-                conn = DriverManager.getConnection(url, properties);
-            }
-            catch(SQLException e){
-                System.out.println(e);
-                System.exit(-1);
-            }
-            catch(Exception e){
-                System.out.println(e);
-                System.exit(-1);
-            }
-            finally{
-                // Close ResultSet and PreparedStatement
-                conn.close();
-            }
-                            
-        
-      out.write("\r\n");
       out.write("    </head>\r\n");
       out.write("    <body>\r\n");
       out.write("        \r\n");
@@ -109,12 +73,12 @@ public final class Template_jsp extends org.apache.jasper.runtime.HttpJspBase
       out.write("            <nav class=\"navbar navbar-inverse navbar-fixed-top\">\r\n");
       out.write("              <div class=\"container-fluid\">\r\n");
       out.write("                <div class=\"navbar-header\">\r\n");
-      out.write("                  <a class=\"navbar-brand\" onclick=\"ChangerTable('Toutes les armes à feu')\" href=\"#\">Marchand d'armes <i class=\"fas fa-fighter-jet\"></i></a>\r\n");
+      out.write("                  <a class=\"navbar-brand\" onclick=\"ChangerTable(0)\" href=\"#\">Dictionnaire des armes à feu  <i class=\"fas fa-fighter-jet\"></i></a>\r\n");
       out.write("                </div>\r\n");
       out.write("                <ul class=\"nav navbar-nav\">\r\n");
-      out.write("                    <li><a href=\"#\" onclick=\"ChangerTable('Rifle')\">Rifle</a></li>\r\n");
-      out.write("                    <li><a href=\"#\" onclick=\"ChangerTable('Pistol')\">Pistol</a></li>\r\n");
-      out.write("                    <li><a href=\"#\" onclick=\"ChangerTable('Kids')\">Kids</a></li>\r\n");
+      out.write("                    <li><a href=\"#\" onclick=\"ChangerTable(1)\">Rifle</a></li>\r\n");
+      out.write("                    <li><a href=\"#\" onclick=\"ChangerTable(2)\">Pistol</a></li>\r\n");
+      out.write("                    <li><a href=\"#\" onclick=\"ChangerTable(3)\">Kids</a></li>\r\n");
       out.write("                </ul>\r\n");
       out.write("                <form class=\"navbar-form navbar-right\" action=\"/action_page.php\" id=\"navBarSearchForm\">\r\n");
       out.write("                  <div class=\"input-group\">\r\n");
@@ -166,38 +130,33 @@ public final class Template_jsp extends org.apache.jasper.runtime.HttpJspBase
       out.write("        </div>\r\n");
       out.write("        \r\n");
       out.write("        <script>\r\n");
-      out.write("        function ChangerTable(nom){\r\n");
-      out.write("            $(\"#table-nom\").text(nom);\r\n");
-      out.write("            $('#table-data').html(\"\\\r\n");
-      out.write("                    <thead>\\\r\n");
-      out.write("                          <tr>\\\r\n");
-      out.write("                            <th scope='col'>#</th>\\\r\n");
-      out.write("                            <th scope=col'>Description</th>\\\r\n");
-      out.write("                            <th scope=col'>Type</th>\\\r\n");
-      out.write("                          </tr>\\\r\n");
-      out.write("                        </thead>\\\r\n");
-      out.write("                        <tbody>\\\r\n");
-      out.write("                          <tr onclick='ChangerImage(1)'>\\\r\n");
-      out.write("                            <th scope='row'>1</th>\\\r\n");
-      out.write("                            <td>Uzi</td>\\\r\n");
-      out.write("                            <td>Kids</td>\\\r\n");
-      out.write("                          </tr>\\\r\n");
-      out.write("                          <tr onclick='ChangerImage(2)'>\\\r\n");
-      out.write("                            <th scope='row'>2</th>\\\r\n");
-      out.write("                            <td>Pistol</td>\\\r\n");
-      out.write("                            <td>Pistol</td>\\\r\n");
-      out.write("                          </tr>\\\r\n");
-      out.write("                          <tr onclick='ChangerImage(3)'>\\\r\n");
-      out.write("                            <th scope='row'>3</th>\\\r\n");
-      out.write("                            <td>Ak-47</td>\\\r\n");
-      out.write("                            <td>Rifle</td>\\\r\n");
-      out.write("                          </tr>\\\r\n");
-      out.write("                        </tbody>\\\r\n");
-      out.write("                        \");\r\n");
+      out.write("        $('document').ready(function(){\r\n");
+      out.write("            ChangerTable(0);\r\n");
+      out.write("        })\r\n");
+      out.write("        \r\n");
+      out.write("        function ChangerTable(idType){\r\n");
+      out.write("            \r\n");
+      out.write("            switch(idType){\r\n");
+      out.write("                case 0:\r\n");
+      out.write("                    $(\"#table-nom\").text(\"Toute les armes\");\r\n");
+      out.write("                    break;\r\n");
+      out.write("                case 1:\r\n");
+      out.write("                    $(\"#table-nom\").text(\"Rifle\");\r\n");
+      out.write("                    break;\r\n");
+      out.write("                case 2:\r\n");
+      out.write("                    $(\"#table-nom\").text(\"Pistol\");\r\n");
+      out.write("                    break;\r\n");
+      out.write("                case 3:\r\n");
+      out.write("                    $(\"#table-nom\").text(\"Kids\");\r\n");
+      out.write("                    break;\r\n");
+      out.write("            }\r\n");
+      out.write("            \r\n");
+      out.write("            $.post(\"./Select.jsp\",{\"idType\":idType},function(data){\r\n");
+      out.write("                $('#table-data').html(data);\r\n");
+      out.write("            });\r\n");
       out.write("        }\r\n");
       out.write("                \r\n");
       out.write("        function ChangerImage(id){\r\n");
-      out.write("            console.log(id);\r\n");
       out.write("            switch(id){\r\n");
       out.write("                case 1:\r\n");
       out.write("                    $('#img-nom').text('uzi');\r\n");
@@ -213,13 +172,6 @@ public final class Template_jsp extends org.apache.jasper.runtime.HttpJspBase
       out.write("                    break;\r\n");
       out.write("            }\r\n");
       out.write("        }\r\n");
-      out.write("                /*\r\n");
-      out.write("                $.post()\"getData\",nom,function(data){\r\n");
-      out.write("                    console.log(\"post success\");\r\n");
-      out.write("                    //post to table in html\r\n");
-      out.write("                });\r\n");
-      out.write("                */\r\n");
-      out.write("            \r\n");
       out.write("        </script>        \r\n");
       out.write("        \r\n");
       out.write("    </body>\r\n");
