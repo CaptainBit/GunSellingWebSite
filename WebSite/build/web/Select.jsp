@@ -38,10 +38,16 @@
         System.exit(-1);
     }
     
-    String idType = request.getParameter("idType");
     String Where = ";";
-    if(!idType.equals("0")){
-        Where = " where types.idtype = " + idType;
+    if(request.getParameter("idType") != null){
+        if(!request.getParameter("idType").equals("0")){
+            Where = " where types.idtype = " + request.getParameter("idType");
+        }
+    }
+    else if(request.getParameter("search")!= null){
+        if(!request.getParameter("search").equals(null)){
+            Where = " where types.description = '" + request.getParameter("search") + "' or guns.description = '" + request.getParameter("search") + "'"; 
+        }
     }
     
     String Requete = "SELECT * FROM guns inner join types on guns.idguns = types.idtype"+ Where;
