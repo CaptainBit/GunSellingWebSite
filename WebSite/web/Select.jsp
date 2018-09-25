@@ -7,7 +7,6 @@
 <%@page import="Guns.ImportationGun"%>
 <%@page import="org.json.JSONArray"%>
 
-<?xml version="1.0" encoding="UTF-8" ?>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%

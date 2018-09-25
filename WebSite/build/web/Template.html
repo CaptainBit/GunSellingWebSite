@@ -101,18 +101,18 @@
                     break;
             }
             
-            $.post("./Select.jsp",{"idType":idType},function(data){
-                
+            $.getJSON("./Select.jsp",{"idType":idType},function(data){
+                console.log(data);
                 var Table = "<thead><tr><th scope=col'>Description</th>" +
                 "<th scope=col'>Type</th><th>Actions</th></tr></thead><tbody>"; 
-        
-                data.forEach((item)=>{
+                
+                data.forEach(function(item){
+                    console.log(item);
                     Table += "<tr onclick='ChangerImage("+ item+")'>" +
                     "<td>"+item.gun_description+"</td><td>"+item.types_description+
                     "</td><td><a href='Edit' title='Edit'><i class='fas fa-edit'></i></a>" +
                     "<a href='Delete' title='Delete'><i class='fas fa-trash-alt'></i></a></td></tr>";
-                });
-                
+                });        
 
                 Table += "</tbody>";
                 
