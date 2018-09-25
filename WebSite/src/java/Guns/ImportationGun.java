@@ -35,7 +35,7 @@ public class ImportationGun {
         
         JSONArray json = new JSONArray();
         Connection conn = null; 
-        
+        String Where = ";";
         //Server url
         String url = "jdbc:mysql://" + SERVERNAME + ":" + PORT + "/" + SCHEMA + PARAMETER;
         
@@ -57,9 +57,11 @@ public class ImportationGun {
             System.exit(-1);
         }
         //Select
-        
-        String Where = "where types.idtype = " + String.valueOf(idType);
-        String Requete = "SELECT * FROM guns inner join types on guns.idguns = types.idtype"+ Where + ";";
+        if(idType != 0)
+        {
+            Where = "where types.idtype = " + String.valueOf(idType) + ";";
+        }
+        String Requete = "SELECT * FROM guns inner join types on guns.idguns = types.idtype"+ Where;
         PreparedStatement pst=null;
         ResultSet rs = null;
         try{
