@@ -85,7 +85,7 @@
         })
         
         function ChangerTable(idType){
-            
+            //TODO Remplacer par les éléments de la BD types
             switch(idType){
                 case 0:
                     $("#table-nom").text("Toutes les armes");
@@ -102,25 +102,27 @@
             }
             
             $.post("./Select.jsp",{"idType":idType},function(data){
-                $('#table-data').html(data);
+                
+                var Table = "<thead><tr><th scope=col'>Description</th>" +
+                "<th scope=col'>Type</th><th>Actions</th></tr></thead><tbody>"; 
+        
+                data.forEach((item)=>{
+                    Table += "<tr onclick='ChangerImage("+ item+")'>" +
+                    "<td>"+item.gun_description+"</td><td>"+item.types_description+
+                    "</td><td><a href='Edit' title='Edit'><i class='fas fa-edit'></i></a>" +
+                    "<a href='Delete' title='Delete'><i class='fas fa-trash-alt'></i></a></td></tr>";
+                });
+                
+
+                Table += "</tbody>";
+                
+                $('#table-data').html(Table);
             });
         }
                 
-        function ChangerImage(id){
-            switch(id){
-                case 3:
-                    $('#img-nom').text('uzi');
-                    $('#img-data').attr("src","./img/uzi.jpg");                    
-                    break;
-                case 2: 
-                    $('#img-nom').text('pistol');                    
-                    $('#img-data').attr("src","./img/pistol.jpg");
-                    break;
-                case 1: 
-                    $('#img-nom').text('ak-47');                    
-                    $('#img-data').attr("src","./img/ak-47.jpg");                    
-                    break;
-            }
+        function ChangerImage(item){
+            $('#img-nom').text(item.gun_description);
+            $('#img-data').attr("src",item.gun_image_Url);                    
         }
         </script>        
         
