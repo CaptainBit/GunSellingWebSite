@@ -7,8 +7,7 @@
 <%@page import="Guns.ImportationGun"%>
 <%@page import="org.json.JSONArray"%>
 
-<%@ page language="java" contentType="text/html; charset=UTF-8"
-    pageEncoding="UTF-8"%>
+<%@ page contentType="application/json" %>
 <%
     int idType = Integer.valueOf(request.getParameter("idType"));
     JSONArray json = ImportationGun.importGunsFromId(idType);
