@@ -108,7 +108,7 @@
                 
                 data.forEach(function(item){
                     console.log(item);
-                    Table += "<tr onclick='ChangerImage("+ item+")'>" +
+                    Table += "<tr onclick='ChangerImage("+ JSON.stringify(item)+")'>" +
                     "<td>"+item.gun_description+"</td><td>"+item.types_description+
                     "</td><td><a href='Edit' title='Edit'><i class='fas fa-edit'></i></a>" +
                     "<a href='Delete' title='Delete'><i class='fas fa-trash-alt'></i></a></td></tr>";
@@ -122,7 +122,7 @@
                 
         function ChangerImage(item){
             $('#img-nom').text(item.gun_description);
-            $('#img-data').attr("src",item.gun_image_Url);                    
+            $('#img-data').attr("src",item.gun_imageUrl);                    
         }
         </script>        
         

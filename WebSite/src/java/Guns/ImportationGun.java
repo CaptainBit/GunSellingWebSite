@@ -35,7 +35,6 @@ public class ImportationGun {
         
         JSONArray json = new JSONArray();
         Connection conn = null; 
-        String Where = ";";
         //Server url
         String url = "jdbc:mysql://" + SERVERNAME + ":" + PORT + "/" + SCHEMA + PARAMETER;
         
@@ -57,25 +56,30 @@ public class ImportationGun {
             System.exit(-1);
         }
         //Select
-        if(idType != 0)
-        {
-            Where = "where types.idtype = " + String.valueOf(idType) + ";";
-        }
-        String Requete = "SELECT * FROM guns inner join types on guns.idguns = types.idtype"+ Where;
+        String Requete = "SELECT * FROM guns inner join types on guns.idguns = types.idtype";
+        
         PreparedStatement pst=null;
         ResultSet rs = null;
         try{
-            pst = conn.prepareStatement(Requete, 1005, 1008);
-            pst.clearParameters();
+            if(idType != 0)
+            {
+                Requete += " where types.idtype = ?";
+                pst = conn.prepareStatement(Requete, 1005, 1008);
+                pst.setInt(1, idType);
+            }
+            else 
+                pst = conn.prepareStatement(Requete, 1005, 1008);            
             
             rs = pst.executeQuery();
+            pst.clearParameters();
+            
             //Create Json
            while(rs.next())
            {
                JSONObject jgun = new JSONObject();
                jgun.put("gun_idguns",rs.getString("guns.idguns"));
                jgun.put("gun_description",rs.getString("guns.description"));
-               jgun.put("gun.imageUrl",rs.getString("guns.imageUrl"));
+               jgun.put("gun_imageUrl",rs.getString("guns.imageUrl"));
                jgun.put("types_description", rs.getString("types.description"));
                json.put(jgun);
            }
