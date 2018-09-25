@@ -1,1 +1,5 @@
 /WebSite/dist/
+WebSite/nbproject/project.properties
+WebSite/nbproject/private/private.properties
+*.properties
+*.xml

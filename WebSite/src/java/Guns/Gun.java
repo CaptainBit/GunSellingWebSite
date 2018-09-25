@@ -5,7 +5,6 @@
  */
 package Guns;
 
-import java.util.Date;
 
 /**
  *
@@ -13,26 +12,17 @@ import java.util.Date;
  */
 public class Gun  {
     private int _id;
-    private String _nom;
-    private int _calibre;
-    private Date _dateSorti;
-    private float _cout;
+    private String _description;
+    private int _typeId;
+    private String _imageUrl;
     
     
      //Constructeur
-    public Gun(int id, String nom, int calibre, Date dateSorti, float salaire){
+    public Gun(int id, String description, int typeId, String imageUrl){
         _id = id;
-        _nom = nom;
-        _calibre = calibre;
-        _dateSorti = dateSorti;
-        _cout = salaire;
-    }
-    
-    public Gun(String nom, int age, Date dateSorti, float salaire){
-        _nom = nom;
-        _calibre = age;
-        _dateSorti = dateSorti;
-        _cout = salaire;
+        _description = description;
+        _typeId =  typeId;
+        _imageUrl = imageUrl;
     }
     
     //Propriétés
@@ -40,39 +30,25 @@ public class Gun  {
         return _id;
     }
     
-    public String getNom(){
-        return _nom;
+    public String getDescription(){
+        return _description;
     }
-    public void setNom(String nom){
-        this._nom = nom;
-    }
-    
-    public int getCalibre(){
-        return _calibre;
-    }
-    public void setCalibre(int age){
-        this._calibre = age;
+    public void setDescription(String description){
+        this._description= description;
     }
     
-    public Date getDateSorti(){
-        return _dateSorti;
+    public int getTypeId(){
+        return _typeId;
     }
-    public void setDateSorti(Date date){
-        this._dateSorti = date;
+    public void setTypeId(int typeId){
+        this. _typeId = typeId;
     }
     
-    public float getCout(){
-        return _cout;
+    public String getImageUrl(){
+        return _imageUrl;
     }
-    public void setCout(float salaire){
-        this._cout = salaire;
-    }
-    //
-    
-    public String printGun(){
-        String line = String.valueOf(_id) + " : " + _nom + " " +
-                String.valueOf(_calibre) +" ans  né(e) le " + String.valueOf(_dateSorti) + " salaire : " + String.valueOf(_cout);
-        return line;
+    public void setImageUrl(String imageUrl){
+        this._imageUrl = imageUrl;
     }
 }
 

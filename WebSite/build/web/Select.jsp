@@ -12,11 +12,11 @@
     String driver = "com.mysql.cj.jdbc.Driver";
     String servername = "localhost";
     String port = "3306";
-    String shema = "bd_guns";
+    String schema = "prog_web";
     String parameter = "?serverTimezone=UTC";
-    String url = "jdbc:mysql://" + servername + ":" + port + "/" + shema + parameter;
+    String url = "jdbc:mysql://" + servername + ":" + port + "/" + schema + parameter;
     String username = "root";
-    String password = "t0t0g5wil"; 
+    String password = ""; 
 
     Properties properties = new Properties();
     properties.setProperty("user", username);
