@@ -74,6 +74,7 @@ public class ImportationGun {
                jgun.put("gun_idguns",rs.getString("guns.idguns"));
                jgun.put("gun_description",rs.getString("guns.description"));
                jgun.put("gun.imageUrl",rs.getString("guns.imageUrl"));
+               jgun.put("types_description", rs.getString("types.description"));
                json.put(jgun);
            }
            
