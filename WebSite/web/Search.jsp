@@ -1,4 +1,3 @@
-
 <%@page import="java.sql.SQLException"%>
 <%@page import="java.sql.DriverManager"%>
 <%@page import="java.util.Properties"%>
@@ -9,8 +8,8 @@
 
 <%@ page contentType="application/json" %>
 <%
-    int idType = Integer.valueOf(request.getParameter("idType"));
-    JSONArray json = ImportationGun.importGunsFromId(idType);
+    String name = request.getParameter("name");
+    JSONArray json = ImportationGun.importGunsFromName(name);
     
     out.print(json);
     out.flush();
