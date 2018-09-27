@@ -56,7 +56,7 @@ public class ImportationGun {
             System.exit(-1);
         }
         //Select
-        String Requete = "SELECT * FROM guns inner join types on guns.idguns = types.idtype";
+        String Requete = "SELECT * FROM guns inner join types on guns.typeId = types.idtype";
         
         PreparedStatement pst=null;
         ResultSet rs = null;
@@ -130,7 +130,7 @@ public class ImportationGun {
             System.exit(-1);
         }
         //Select
-        String Requete = "SELECT * FROM guns inner join types on guns.idguns = types.idtype where guns.description = ? ;";
+        String Requete = "SELECT * FROM guns inner join types on guns.typeId = types.idtype where guns.description = ? ;";
         
         PreparedStatement pst=null;
         ResultSet rs = null;
