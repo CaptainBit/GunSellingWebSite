@@ -26,9 +26,9 @@
                   <a class="navbar-brand" onclick="ChangerTable(0)" href="#">Taste the freedom  <i class="fas fa-fighter-jet"></i></a>
                 </div>
                 <ul class="nav navbar-nav">
-                    <li><a href="#" onclick="ChangerTable(1)">Rifle</a></li>
-                    <li><a href="#" onclick="ChangerTable(2)">Pistol</a></li>
-                    <li><a href="#" onclick="ChangerTable(3)">Kids</a></li>
+                    <li><a href="#Rifle" onclick="ChangerTable(1)">Rifle</a></li>
+                    <li><a href="#Pistol" onclick="ChangerTable(2)">Pistol</a></li>
+                    <li><a href="#Kids" onclick="ChangerTable(3)">Kids</a></li>
                 </ul>
                 <form class="navbar-form navbar-right" action="javascript:FindGun(search.value)" id="navBarSearchForm">
                   <div class="input-group">
@@ -72,6 +72,9 @@
                             <div class="text-center">
                                 <img id="img-data" src="" class="img-fluid" alt="Aucune image">   
                             </div>
+                            <h5 id="img-calibre"></h5>
+                            <h5 id="img-action"></h5>
+                            <h5 id="img-poids"></h5>
                         </div>
                     </article>                    
                 </aside>
@@ -146,7 +149,7 @@
         }
         function FindGun(name)
         {
-            $("#table-nom").text("Resultat de la recherche  :"+name);
+            $("#table-nom").text("Resultat de la recherche  : " + name);
             $.getJSON("./Search.jsp",{"name":name},function(data){
                 var Table = "<thead><tr><th scope=col'>Description</th>" +
                 "<th scope=col'>Type</th><th class='text-right'>Actions</th></tr></thead><tbody>"; 
@@ -167,7 +170,24 @@
         }       
         function ChangerImage(item){
             $('#img-nom').text(item.gun_description);
-            $('#img-data').attr("src",item.gun_imageUrl);       
+            $('#img-data').attr("src",item.gun_imageUrl);
+            $('#img-calibre').text("");
+            $('#img-action').text("");
+            $('#img-poids').text("");
+            
+            if(checkNull(item.gun_calibre)){
+                $('#img-calibre').text("Calibre : " + item.gun_calibre);                
+            }
+            if(checkNull(item.gun_action)){
+                $('#img-action').text("Action : " + item.gun_action);
+            }
+            if(checkNull(item.gun_poids)){
+                $('#img-poids').text("Poids : " + item.gun_poids);
+            }
+        }
+        
+        function checkNull(value){
+            return typeof value !== "undefined" && value !== null && value !== "0.0" && value !== "";
         }
         </script>        
         

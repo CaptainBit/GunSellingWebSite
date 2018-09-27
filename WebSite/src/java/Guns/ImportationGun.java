@@ -28,7 +28,7 @@ public class ImportationGun {
     public final static String SCHEMA = "prog_web";
     public final static String PARAMETER = "?serverTimezone=UTC";
     public final static String USERNAME = "root";
-    public final static String PASSWORD = "";
+    public final static String PASSWORD = "t0t0g5wil";
     
     public static JSONArray importGunsFromId(int idType)
     {
@@ -76,11 +76,15 @@ public class ImportationGun {
             //Create Json
            while(rs.next())
            {
-               JSONObject jgun = new JSONObject();
-               jgun.put("gun_idguns",rs.getString("guns.idguns"));
-               jgun.put("gun_description",rs.getString("guns.description"));
-               jgun.put("gun_imageUrl",rs.getString("guns.imageUrl"));
-               jgun.put("types_description", rs.getString("types.description"));
+                JSONObject jgun = new JSONObject();
+                jgun.put("gun_idguns",rs.getString("guns.idguns"));
+                jgun.put("gun_description",rs.getString("guns.description"));
+                jgun.put("gun_imageUrl",rs.getString("guns.imageUrl"));
+                jgun.put("types_description", rs.getString("types.description"));
+                jgun.put("gun_calibre", rs.getString("guns.calibre"));
+                jgun.put("gun_action", rs.getString("guns.action"));
+                jgun.put("gun_poids", rs.getString("guns.poids"));
+
                json.put(jgun);
            }
            
@@ -145,12 +149,14 @@ public class ImportationGun {
             //Create Json
            while(rs.next())
            {
-               JSONObject jgun = new JSONObject();
-               jgun.put("gun_idguns",rs.getString("guns.idguns"));
-               jgun.put("gun_description",rs.getString("guns.description"));
-               jgun.put("gun_imageUrl",rs.getString("guns.imageUrl"));
-               jgun.put("types_description", rs.getString("types.description"));
-               json.put(jgun);
+                JSONObject jgun = new JSONObject();
+                jgun.put("gun_idguns",rs.getString("guns.idguns"));
+                jgun.put("gun_description",rs.getString("guns.description"));
+                jgun.put("gun_imageUrl",rs.getString("guns.imageUrl"));
+                jgun.put("types_description", rs.getString("types.description"));
+                jgun.put("gun_calibre", rs.getString("guns.calibre"));
+                jgun.put("gun_action", rs.getString("guns.action"));
+                jgun.put("gun_poids", rs.getString("guns.poids"));
            }
            
           // Close ResultSet and PreparedStatement
