@@ -165,7 +165,7 @@
             }
             
             $.getJSON("./Select.jsp",{"idType":idType},function(data){
-                var Table = "<thead><tr><th scope=col'>Description</th>" +
+                var Table = "<thead class='thead-dark'><tr><th scope=col'>Description</th>" +
                 "<th scope=col'>Type</th><th class='text-right'>Actions</th></tr></thead><tbody>"; 
                 
                 data.forEach(function(item){
@@ -185,7 +185,7 @@
         {
             $("#table-nom").text("Resultat de la recherche  : " + name);
             $.getJSON("./Search.jsp",{"name":name},function(data){
-                var Table = "<thead><tr><th scope=col'>Description</th>" +
+                var Table = "<thead class='thead-dark'><tr><th scope=col'>Description</th>" +
                 "<th scope=col'>Type</th><th class='text-right'>Actions</th></tr></thead><tbody>"; 
                 
                 data.forEach(function(item){
