@@ -157,6 +157,9 @@ public class ImportationGun {
                 jgun.put("gun_calibre", rs.getString("guns.calibre"));
                 jgun.put("gun_action", rs.getString("guns.action"));
                 jgun.put("gun_poids", rs.getString("guns.poids"));
+                
+                json.put(jgun);
+
            }
            
           // Close ResultSet and PreparedStatement
