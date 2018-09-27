@@ -3,7 +3,7 @@
     
     <head>
         <script src="./js/libs/jquery/jquery.js"></script>
-       <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css" integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous">
+        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
         <style>
             #navBarSearchForm input[type=text]{width:430px !important;}
             .transparent{    
@@ -20,17 +20,17 @@
     <body style="background-color: #999999">
         
         <div class="header">
-            <nav class="navbar navbar-fixed-top" style="background-color:#212529;color: white;">
+            <nav class="navbar navbar-inverse navbar-fixed-top" style="background-color:  #003300">
               <div class="container-fluid">
                 <div class="navbar-header">
-                  <a class="navbar-brand" onclick="ChangerTable(0)" href="#">BuyGunsGoGo  <i class="fas fa-fighter-jet"></i></a>
+                  <a class="navbar-brand" onclick="ChangerTable(0)" href="#">Dictionnaire des armes à feu  <i class="fas fa-fighter-jet"></i></a>
                 </div>
-                <ul class ="nav navbar-nav">
-                    <li><a href="#" onclick="ChangerTable(1)" class ="nav-link">Rifle</a></li>
-                    <li><a href="#" onclick="ChangerTable(2)" class ="nav-link">Pistol</a></li>
-                    <li><a href="#" onclick="ChangerTable(3)" class ="nav-link">Kids</a></li>
+                <ul class="nav navbar-nav">
+                    <li><a href="#" onclick="ChangerTable(1)">Rifle</a></li>
+                    <li><a href="#" onclick="ChangerTable(2)">Pistol</a></li>
+                    <li><a href="#" onclick="ChangerTable(3)">Kids</a></li>
                 </ul>
-                  <form class="navbar-form navbar-right" action="./Select.jsp" method="get" id="navBarSearchForm">
+                <form class="navbar-form navbar-right" action="./Select.jsp" method="get" id="navBarSearchForm">
                   <div class="input-group">
                     <input type="text" class="form-control" placeholder="Recherche d'une arme à feu" name="search">
                     <div class="input-group-btn">
@@ -41,24 +41,28 @@
                   </div>
                 </form>
               </div>
-            </nav>      
+            </nav>                            
+        </div>  
+        
         <div class="container-fluid" style="padding-top: 80px">
-            <div class="row">   
+            
+            <div class="row">
+                
                 <section class="col-xs-12 col-sm-12 col-md-8 col-lg-7">
-                    <article class="panel panel-primary transparent"style="background-color:#212529;color: white;width:100%;">
-                      <div class="panel-heading"style="background-color:#212529;color: white;">Recherche</div>
+                    <article class="panel panel-primary transparent" style="width:100%;">
+                      <div class="panel-heading">Recherche</div>
                       <div class="panel-body">
-                          <h4 id="table-nom" style="background-color:#212529;color: white;">Toutes les armes à feu</h4>
-                          <table class="table table-dark table table-hover" id="table-data">
+                          <h4 id="table-nom">Toutes les armes à feu</h4>
+                          <table class="table table-hover" id="table-data">
                           </table>
                       </div>
                     </article>
                 </section>
                 
                 <aside class="col-xs-12 col-sm-12 col-md-4 col-lg-5">
-                    <article class="panel panel-primary panel" style="background-color:#212529;color: white">
-                        <div class="panel-heading" style="background-color:#212529;color: white">Description de l'arme à feu</div>
-                        <div class="panel-body" style="background-color:#212529;color: white;">
+                    <article class="panel panel-primary">
+                        <div class="panel-heading">Description de l'arme à feu</div>
+                        <div class="panel-body">
                             <h4 id="img-nom"></h4>
                             <div class="text-center">
                                 <img id="img-data" src="" class="img-fluid" alt="Aucune image">   
@@ -100,7 +104,7 @@
             }
             
             $.getJSON("./Select.jsp",{"idType":idType},function(data){
-                var Table = "<thead class='thead-dark'><tr><th scope=col'>Description</th>" +
+                var Table = "<thead><tr><th scope=col'>Description</th>" +
                 "<th scope=col'>Type</th><th class='text-right'>Actions</th></tr></thead><tbody>"; 
                 
                 data.forEach(function(item){

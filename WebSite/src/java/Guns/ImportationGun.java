@@ -25,10 +25,10 @@ public class ImportationGun {
     public final static String DRIVER = "com.mysql.cj.jdbc.Driver";
     public final static String SERVERNAME= "localhost";
     public final static String PORT = "3306";
-    public final static String SCHEMA = "prog_web";
+    public final static String SCHEMA = "bd_guns";
     public final static String PARAMETER = "?serverTimezone=UTC";
     public final static String USERNAME = "root";
-    public final static String PASSWORD = "";
+    public final static String PASSWORD = "t0t0g5wil";
     
     public static JSONArray importGunsFromId(int idType)
     {
