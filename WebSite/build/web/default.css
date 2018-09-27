@@ -3,3 +3,6 @@
   background-color: #0080FF;
   color:white;
 }
+.table-hover tbody tr td, .table-hover tbody tr th {
+    transition: 0.25s;
+}
