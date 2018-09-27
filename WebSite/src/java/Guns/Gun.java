@@ -13,16 +13,23 @@ package Guns;
 public class Gun  {
     private int _id;
     private String _description;
-    private int _typeId;
     private String _imageUrl;
+    private int _typeId;
+    private String _calibre;
+    private String _action;
+    private float _poids;
+   
     
     
      //Constructeur
-    public Gun(int id, String description, int typeId, String imageUrl){
+    public Gun(int id, String description, int typeId, String imageUrl, String calibre, String action ,float poids){
         _id = id;
         _description = description;
         _typeId =  typeId;
         _imageUrl = imageUrl;
+        _calibre = calibre;
+        _action = action;
+        _poids = poids;
     }
     
     //Propriétés
@@ -49,6 +56,24 @@ public class Gun  {
     }
     public void setImageUrl(String imageUrl){
         this._imageUrl = imageUrl;
+    }
+    public String getCalibre(){
+        return _calibre;
+    }
+    public void setCalibre(String calibre){
+        this._calibre = calibre;
+    }
+    public String getAction(){
+        return _action;
+    }
+    public void setAction(String action){
+        this._action = action;
+    }
+    public float getPoids(){
+        return _poids;
+    }
+    public void setPoids(float poids){
+        this._poids = poids;
     }
 }
 
