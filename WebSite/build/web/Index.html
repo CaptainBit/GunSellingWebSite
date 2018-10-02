@@ -54,8 +54,12 @@
                     <article class="panel panel-primary transparent" style="width:100%;">
                       <div class="panel-heading" style="background-color:  #002868  " ><font size="5">Recherche</font></div>
                       <div class="panel-body">
+                        <div>
+                            <button type="button" onclick="addItem()" class="btn btn-primary">Ajouter une arme à feu</button>
+                        </div>
+                        <br/>
                         <div class="text-left col-lg-8">
-                            <h4 id="table-nom"><font size="4">Toutes les armes à feu</font></h4>
+                            <h4 id="table-nom"><font size="4"></font></h4>
                         </div>
                         <div class="text-right col-lg-4">
                           <input type="text" class="form-control" onkeyup="SearchTable()" placeholder="Recherche dans la table" id="searchTable">
@@ -226,6 +230,11 @@
             console.log(item);
             $("#myModal").modal();
             $('#titreModal').text("Modifier " + item.gun_description);
+        }
+        
+        function addItem(){
+            $("#myModal").modal();
+            $('#titreModal').text("Ajouter une nouvelle arme à feu");            
         }
         
         function CreateTable(data){
