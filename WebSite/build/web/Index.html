@@ -165,40 +165,14 @@
             }
             
             $.getJSON("./Select.jsp",{"idType":idType},function(data){
-                var Table = "<thead class='thead-dark'><tr><th scope=col'>Description</th>" +
-                "<th scope=col'>Type</th><th class='text-right'>Actions</th></tr></thead><tbody>"; 
-                
-                data.forEach(function(item){
-                    console.log(item);
-                    Table += "<tr onclick='ChangerImage("+ JSON.stringify(item)+")'>" +
-                    "<td>"+item.gun_description+"</td><td>"+item.types_description+
-                    "</td><td class='text-right'><a href='Edit' title='Edit'><i class='fas fa-edit fa-lg fa-fw'></i></a>" +
-                    "<a onclick='deleteItem("+ item.gun_idguns+")' title='Delete'><i class='fas fa-trash-alt fa-lg fa-fw'></i></a></td></tr>";
-                });        
-
-                Table += "</tbody>";
-                
-                $('#table-data').html(Table);
+                CreateTable(data);
             });
         }
         function FindGun(name)
         {
             $("#table-nom").text("Resultat de la recherche  : " + name);
             $.getJSON("./Search.jsp",{"name":name},function(data){
-                var Table = "<thead class='thead-dark'><tr><th scope=col'>Description</th>" +
-                "<th scope=col'>Type</th><th class='text-right'>Actions</th></tr></thead><tbody>"; 
-                
-                data.forEach(function(item){
-                    console.log(item);
-                    Table += "<tr onclick='ChangerImage("+ JSON.stringify(item)+")'>" +
-                    "<td>"+item.gun_description+"</td><td>"+item.types_description+
-                    "</td><td class='text-right'><a href='Edit' title='Edit'><i class='fas fa-edit fa-lg fa-fw'></i></a>" +
-                    "<a href='./Delete.jsp' title='Delete'><i class='fas fa-trash-alt fa-lg fa-fw'></i></a></td></tr>";
-                });        
-
-                Table += "</tbody>";
-                
-                $('#table-data').html(Table);
+                CreateTable(data);
             });
 
         }       
@@ -229,6 +203,23 @@
              $.post("./Delete.jsp",{"idGun":idGun},function(data){
                console.log(data);
             });
+        }
+        
+        function CreateTable(data){
+            var Table = "<thead class='thead-dark'><tr><th scope=col'>Description</th>" +
+                "<th scope=col'>Type</th><th class='text-right'>Actions</th></tr></thead><tbody>"; 
+                
+                data.forEach(function(item){
+                    console.log(item);
+                    Table += "<tr onclick='ChangerImage("+ JSON.stringify(item)+")'>" +
+                    "<td>"+item.gun_description+"</td><td>"+item.types_description+
+                    "</td><td class='text-right'><a href='Edit' title='Edit'><i class='fas fa-edit fa-lg fa-fw'></i></a>" +
+                    "<a href='#' onclick='deleteItem("+ item.gun_idguns+")' title='Delete'><i class='fas fa-trash-alt fa-lg fa-fw'></i></a></td></tr>";
+                });        
+
+                Table += "</tbody>";
+                
+                $('#table-data').html(Table);
         }
         </script>        
         
