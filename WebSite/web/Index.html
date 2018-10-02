@@ -109,11 +109,11 @@
                         <div class="modal-body">
                             <div class="form-group">
                                 <label>Nom</label>
-                                <input type="text" name="description" class="form-control" placeholder="Nom">
+                                <input id="editNom" type="text" name="description" class="form-control" placeholder="Nom">
                             </div>                                                        
                             <div class="form-group">
                                 <label>Type</label>                            
-                                <select class="form-control" name="type">
+                                <select id="editType" class="form-control" name="type">
                                     <option>rifle</option>
                                     <option>pistol</option>
                                     <option>kids</option>
@@ -121,19 +121,19 @@
                             </div>                                                        
                             <div class="form-group">                            
                                 <label>Calibre</label>                            
-                                <input type="text" name="calibre" class="form-control" placeholder="Calibre">
+                                <input id="editCalibre" type="text" name="calibre" class="form-control" placeholder="Calibre">
                             </div>                                                        
                             <div class="form-group">                           
                                 <label>Action</label>                            
-                                <input type="text" name="action" class="form-control" placeholder="Action">
+                                <input id="editAction" type="text" name="action" class="form-control" placeholder="Action">
                             </div>                                                        
                             <div class="form-group">                            
                                 <label>Poids</label>                            
-                                <input type="text" name="poids" class="form-control" placeholder="Poids">           
+                                <input id="editPoids" type="text" name="poids" class="form-control" placeholder="Poids">           
                             </div>       
                             <div class="form-group">                            
                                 <label>Importer une image</label>
-                                <input type="file" name="image" class="form-control-file" 
+                                <input id="editFile" type="file" name="image" class="form-control-file" 
                                        accept="image/png, image/jpeg">
                             </div>
                         </div>
@@ -151,11 +151,9 @@
         $('document').ready(function(){
             ChangerTable(0); 
             
-            $(document).on("submit", "form", function(event)
+            $(document).on("submit", "#formModal", function(event)
             {
                 event.preventDefault();
-                
-                console.log(new FormData(this));
                 
                 var url=$(this).attr("action");
                 $.ajax({
@@ -167,12 +165,11 @@
                     contentType: false,
                     success: function (data, status)
                     {
-
+                        alert(data);
                     },
                     error: function (xhr, desc, err)
                     {
-
-
+                        alert(err);
                     }
                 });        
 
@@ -260,6 +257,13 @@
             $("#myModal").modal();
             $('#titreModal').text("Modifier " + item.gun_description);
             $('#formModal').attr('action','./Edit');
+            
+            $('#editNom').val(item.gun_description);
+            $('#editType').val(item.types_description);
+            $('#editAction').val(item.gun_action);
+            $('#editCalibre').val(item.gun_calibre);
+            $('#editPoids').val(item.gun_poids);
+            $('#editFile').val(item.gun_imageUrl);
         }
         
         function addItem(){
