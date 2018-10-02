@@ -134,7 +134,7 @@ public class SQLOrderGun {
             System.exit(-1);
         }
         //Select
-        String Requete = "SELECT * FROM guns inner join types on guns.typeId = types.idtype where guns.description = ? ;";
+        String Requete = "SELECT * FROM guns inner join types on guns.typeId = types.idtype where guns.description like ? ;";
         
         PreparedStatement pst=null;
         ResultSet rs = null;
@@ -142,7 +142,7 @@ public class SQLOrderGun {
            
             
             pst = conn.prepareStatement(Requete, 1005, 1008);            
-            pst.setString(1, name);
+            pst.setString(1, "%"+name+"%");
             rs = pst.executeQuery();
             pst.clearParameters();
             
