@@ -3,3 +3,12 @@ WebSite/nbproject/project.properties
 WebSite/nbproject/private/private.properties
 *.properties
 *.xml
+WebSite/build/web/WEB-INF/classes/Guns/ImportationGun.class
+WebSite/build/web/WEB-INF/lib/java-json.jar
+WebSite/nbproject/build-impl.xml
+WebSite/nbproject/build-impl.xml~
+WebSite/nbproject/genfiles.properties
+WebSite/nbproject/private/private.properties
+WebSite/nbproject/private/private.xml
+WebSite/nbproject/project.properties
+WebSite/nbproject/project.xml
