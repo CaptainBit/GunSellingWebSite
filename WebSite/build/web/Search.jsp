@@ -3,13 +3,13 @@
 <%@page import="java.util.Properties"%>
 <%@page import="java.sql.ResultSet"%>
 <%@page import="java.sql.PreparedStatement"%>
-<%@page import="Guns.ImportationGun"%>
+<%@page import="Guns.SQLOrderGun"%>
 <%@page import="org.json.JSONArray"%>
 
 <%@ page contentType="application/json" %>
 <%
     String name = request.getParameter("name");
-    JSONArray json = ImportationGun.importGunsFromName(name);
+    JSONArray json = SQLOrderGun.importGunsFromName(name);
     
     out.print(json);
     out.flush();
