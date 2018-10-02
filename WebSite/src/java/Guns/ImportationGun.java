@@ -181,6 +181,52 @@ public class ImportationGun {
         }
             return json;
     }
+    public static boolean DeleteGun(int idGun)
+    {
+        Connection conn = null; 
+        //Server url
+        String url = "jdbc:mysql://" + SERVERNAME + ":" + PORT + "/" + SCHEMA + PARAMETER;
+        
+        //propreties for server
+        Properties properties = new Properties();
+        properties.setProperty("user", USERNAME);
+        properties.setProperty("password", PASSWORD);
+        properties.setProperty("useSSL", "false");
+        properties.setProperty("verifyServerCertificate", "true");
+        properties.setProperty("requireSSL", "false");
+
+        //Connect 
+        try{
+            Class.forName(DRIVER).newInstance();
+            conn = DriverManager.getConnection(url, properties);
+        }
+        catch(SQLException |ClassNotFoundException | IllegalAccessException | InstantiationException e){
+           return false;
+        }
+        //Delete 
+        String requete = "DELETE FROM guns where idguns = ? ;";
+        PreparedStatement pst=null;
+        try{
+           
+            
+            pst = conn.prepareStatement(requete, 1005, 1008);            
+            pst.setInt(1, idGun);
+            pst.executeUpdate();
+            pst.clearParameters();
+        }catch(SQLException e)
+        {
+           return false;
+        }finally
+        {
+           try{
+              conn.close();
+           }catch(SQLException e){
+               return false;
+ 
+           }
+        }
+        return true; 
+    }
 }
 
 
