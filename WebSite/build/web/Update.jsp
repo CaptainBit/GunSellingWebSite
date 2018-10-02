@@ -36,8 +36,8 @@
         System.out.println(e);
         System.exit(-1);
     }
-    Gun gunToAdd = new Gun(idGun,description, typeId, imageUrl, calibre, action, poids);
-    SQLOrderGun.AddGun(gunToAdd);
+    Gun gunToUpdate = new Gun(idGun,description, typeId, imageUrl, calibre, action, poids);
+    SQLOrderGun.UpdateGun(gunToUpdate);
     
  
 %>
