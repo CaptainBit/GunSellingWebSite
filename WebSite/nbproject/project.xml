@@ -14,7 +14,6 @@
                     <file>${file.reference.java-json.jar}</file>
                     <path-in-war>WEB-INF/lib</path-in-war>
                 </library>
-<<<<<<< HEAD
                 <library dirs="200">
                     <file>${file.reference.java-json.jar-1}</file>
                     <path-in-war>WEB-INF/lib</path-in-war>
@@ -23,8 +22,6 @@
                     <file>${file.reference.java-json.jar-2}</file>
                     <path-in-war>WEB-INF/lib</path-in-war>
                 </library>
-=======
->>>>>>> bc195584944260aa80dccb9e835dfdbc244e0bf2
             </web-module-libraries>
             <web-module-additional-libraries/>
             <source-roots>
