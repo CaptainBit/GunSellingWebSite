@@ -28,7 +28,7 @@ public class SQLOrderGun {
     public final static String SCHEMA = "prog_web";
     public final static String PARAMETER = "?serverTimezone=UTC";
     public final static String USERNAME = "root";
-    public final static String PASSWORD = "t0t0g5wil";
+    public final static String PASSWORD = "";
     
     public static JSONArray importGunsFromId(int idType)
     {
