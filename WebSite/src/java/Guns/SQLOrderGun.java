@@ -20,7 +20,7 @@ import org.json.JSONObject;
  *
  * @author admin
  */
-public class ImportationGun {
+public class SQLOrderGun {
     
     public final static String DRIVER = "com.mysql.cj.jdbc.Driver";
     public final static String SERVERNAME= "localhost";
@@ -226,6 +226,57 @@ public class ImportationGun {
            }
         }
         return true; 
+    }
+    
+    public static boolean AddGun(Gun gun)
+    {
+        Connection conn = null; 
+        //Server url
+        String url = "jdbc:mysql://" + SERVERNAME + ":" + PORT + "/" + SCHEMA + PARAMETER;
+        
+        //propreties for server
+        Properties properties = new Properties();
+        properties.setProperty("user", USERNAME);
+        properties.setProperty("password", PASSWORD);
+        properties.setProperty("useSSL", "false");
+        properties.setProperty("verifyServerCertificate", "true");
+        properties.setProperty("requireSSL", "false");
+
+        //Connect 
+        try{
+            Class.forName(DRIVER).newInstance();
+            conn = DriverManager.getConnection(url, properties);
+        }
+        catch(SQLException |ClassNotFoundException | IllegalAccessException | InstantiationException e){
+           return false;
+        }
+        //ADD
+        String requete = "INSERT INTO `guns` (`description`, `typeId`, `imageUrl`, `calibre`, `action`, `poids`) "
+                + "VALUES (?, ?, ?, ?, ?,?)";
+        PreparedStatement pst=null;
+        try{
+            
+            pst = conn.prepareStatement(requete, 1005, 1008);            
+            pst.setString(1, gun.getDescription());
+            pst.setInt(2, gun.getTypeId());
+            pst.setString(3, gun.getImageUrl());
+            pst.setString(4, gun.getCalibre());
+            pst.setString(5, gun.getAction());
+            pst.setFloat(6, gun.getPoids());
+            pst.executeUpdate();
+        }catch(SQLException e)
+        {
+           return false;
+        }finally
+        {
+           try{
+              conn.close();
+           }catch(SQLException e){
+               return false;
+ 
+           }
+        }
+        return true;
     }
 }
 

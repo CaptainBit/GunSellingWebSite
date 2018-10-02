@@ -31,7 +31,14 @@ public class Gun  {
         _action = action;
         _poids = poids;
     }
-    
+    public Gun(String description, int typeId, String imageUrl, String calibre, String action ,float poids){
+        _description = description;
+        _typeId =  typeId;
+        _imageUrl = imageUrl;
+        _calibre = calibre;
+        _action = action;
+        _poids = poids;
+    }
     //Propriétés
     public int getId(){
         return _id;
