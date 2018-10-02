@@ -278,6 +278,58 @@ public class SQLOrderGun {
         }
         return true;
     }
+    
+        public static boolean UpdateGun(Gun gun)
+    {
+        Connection conn = null; 
+        //Server url
+        String url = "jdbc:mysql://" + SERVERNAME + ":" + PORT + "/" + SCHEMA + PARAMETER;
+        
+        //propreties for server
+        Properties properties = new Properties();
+        properties.setProperty("user", USERNAME);
+        properties.setProperty("password", PASSWORD);
+        properties.setProperty("useSSL", "false");
+        properties.setProperty("verifyServerCertificate", "true");
+        properties.setProperty("requireSSL", "false");
+
+        //Connect 
+        try{
+            Class.forName(DRIVER).newInstance();
+            conn = DriverManager.getConnection(url, properties);
+        }
+        catch(SQLException |ClassNotFoundException | IllegalAccessException | InstantiationException e){
+           return false;
+        }
+        //ADD
+        String requete = "UPDATE `guns` SET `description`= ?, `typeId`=?, `imageUrl`=?, `calibre`=?, `action`=?, `poids`=? "
+                +"WHERE idguns = ?";
+        PreparedStatement pst=null;
+        try{
+            
+            pst = conn.prepareStatement(requete, 1005, 1008);            
+            pst.setString(1, gun.getDescription());
+            pst.setInt(2, gun.getTypeId());
+            pst.setString(3, gun.getImageUrl());
+            pst.setString(4, gun.getCalibre());
+            pst.setString(5, gun.getAction());
+            pst.setFloat(6, gun.getPoids());
+            pst.setInt(7, gun.getId());
+            pst.executeUpdate();
+        }catch(SQLException e)
+        {
+           return false;
+        }finally
+        {
+           try{
+              conn.close();
+           }catch(SQLException e){
+               return false;
+ 
+           }
+        }
+        return true;
+    }
 }
 
 
