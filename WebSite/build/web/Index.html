@@ -160,7 +160,7 @@
                     url: url,
                     type: $(this).attr("method"),
                     dataType: "JSON",
-                    data: new FormData(this),
+                    data: new FormData(this).serialize(),
                     processData: false,
                     contentType: false,
                     success: function (data, status)
