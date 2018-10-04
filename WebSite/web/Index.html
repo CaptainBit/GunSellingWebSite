@@ -15,7 +15,7 @@
               href="https://use.fontawesome.com/releases/v5.3.1/css/all.css"
               crossorigin="anonymous">
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-        <title>Template</title>
+        <title>Index</title>
     </head>
     <body style="background-color: #999999">
         
@@ -248,7 +248,8 @@
         function deleteItem(idGun)
         {
              $.post("./Delete.jsp",{"idGun":idGun},function(data){
-               location.reload();
+                alert(data);       
+                location.reload();               
             });
         }
         
@@ -256,7 +257,7 @@
             console.log(item);
             $("#myModal").modal();
             $('#titreModal').text("Modifier " + item.gun_description);
-            $('#formModal').attr('action','./Edit');
+            $('#formModal').attr('action','./Update.jsp');
             
             $('#editNom').val(item.gun_description);
             $('#editType').val(item.types_description);
@@ -269,7 +270,14 @@
         function addItem(){
             $("#myModal").modal();
             $('#titreModal').text("Ajouter une nouvelle arme à feu");
-            $('#formModal').attr('action','./Add');
+            $('#formModal').attr('action','./AddGun.jsp');
+            
+            $('#editNom').val("");
+            $('#editType').val("");
+            $('#editAction').val("");
+            $('#editCalibre').val("");
+            $('#editPoids').val("");
+            $('#editFile').val("");
         }
         
         function CreateTable(data){
