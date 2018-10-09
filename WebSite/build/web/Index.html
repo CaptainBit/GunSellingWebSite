@@ -109,11 +109,11 @@
                         <div class="modal-body">
                             <div class="form-group">
                                 <label>Nom</label>
-                                <input id="editNom" type="text" name="description" class="form-control" placeholder="Nom">
+                                <input id="editNom" type="text" name="description" class="form-control" placeholder="Nom" required>
                             </div>                                                        
                             <div class="form-group">
                                 <label>Type</label>                            
-                                <select id="editType" class="form-control" name="type">
+                                <select id="editType" class="form-control" name="type" required>
                                 </select>
                             </div>                                                        
                             <div class="form-group">                            
@@ -125,8 +125,8 @@
                                 <input id="editAction" type="text" name="action" class="form-control" placeholder="Action">
                             </div>                                                        
                             <div class="form-group">                            
-                                <label>Poids</label>                            
-                                <input id="editPoids" type="text" name="poids" class="form-control" placeholder="Poids">           
+                                <label>Poids en gramme</label>                            
+                                <input id="editPoids" type="number" name="poids" class="form-control" placeholder="Poids">           
                             </div>       
                             <div class="form-group">                            
                                 <label>Importer une image</label>
@@ -165,8 +165,9 @@
                 
                 var url=$(this).attr("action");
                 
-                $.post(url, new FormData(this),(response)=>{
-                    console.log(response);
+                $.post(url, $('#formModal').serialize(),(response)=>{
+                    alert(response);       
+                    location.reload();
                 });      
             });            
         })
@@ -233,7 +234,7 @@
                 $('#img-action').text("Action : " + item.gun_action);
             }
             if(checkNull(item.gun_poids)){
-                $('#img-poids').text("Poids : " + item.gun_poids);
+                $('#img-poids').text("Poids : " + item.gun_poids + " g");
             }
         }
         
