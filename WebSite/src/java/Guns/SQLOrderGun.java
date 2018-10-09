@@ -5,7 +5,6 @@ import java.sql.DriverManager;
 import java.sql.SQLException;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
-import java.util.List;
 import java.util.Properties;
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -31,10 +30,7 @@ public class SQLOrderGun {
     public final static String USERNAME = "root";
     public final static String PASSWORD = "t0t0g5wil";
     
-    public static JSONArray importGunsFromId(int idType)
-    {
-        
-        JSONArray json = new JSONArray();
+    private static Connection connectionBd(){
         Connection conn = null; 
         //Server url
         String url = "jdbc:mysql://" + SERVERNAME + ":" + PORT + "/" + SCHEMA + PARAMETER;
@@ -56,6 +52,15 @@ public class SQLOrderGun {
             System.out.println(e);
             System.exit(-1);
         }
+        
+        return conn;
+    }
+    
+    public static JSONArray importGunsFromId(int idType)
+    {
+        JSONArray json = new JSONArray();
+        Connection conn = connectionBd();
+        
         //Select
         String Requete = "SELECT * FROM guns inner join types on guns.typeId = types.idtype";
         
@@ -113,27 +118,8 @@ public class SQLOrderGun {
     {
         
         JSONArray json = new JSONArray();
-        Connection conn = null; 
-        //Server url
-        String url = "jdbc:mysql://" + SERVERNAME + ":" + PORT + "/" + SCHEMA + PARAMETER;
+        Connection conn = connectionBd();
         
-        //propreties for server
-        Properties properties = new Properties();
-        properties.setProperty("user", USERNAME);
-        properties.setProperty("password", PASSWORD);
-        properties.setProperty("useSSL", "false");
-        properties.setProperty("verifyServerCertificate", "true");
-        properties.setProperty("requireSSL", "false");
-
-        //Connect 
-        try{
-            Class.forName(DRIVER).newInstance();
-            conn = DriverManager.getConnection(url, properties);
-        }
-        catch(SQLException |ClassNotFoundException | IllegalAccessException | InstantiationException e){
-            System.out.println(e);
-            System.exit(-1);
-        }
         //Select
         String Requete = "SELECT * FROM guns inner join types on guns.typeId = types.idtype where guns.description like ? ;";
         
@@ -184,26 +170,9 @@ public class SQLOrderGun {
     }
     public static boolean DeleteGun(int idGun)
     {
-        Connection conn = null; 
-        //Server url
-        String url = "jdbc:mysql://" + SERVERNAME + ":" + PORT + "/" + SCHEMA + PARAMETER;
+        JSONArray json = new JSONArray();
+        Connection conn = connectionBd();
         
-        //propreties for server
-        Properties properties = new Properties();
-        properties.setProperty("user", USERNAME);
-        properties.setProperty("password", PASSWORD);
-        properties.setProperty("useSSL", "false");
-        properties.setProperty("verifyServerCertificate", "true");
-        properties.setProperty("requireSSL", "false");
-
-        //Connect 
-        try{
-            Class.forName(DRIVER).newInstance();
-            conn = DriverManager.getConnection(url, properties);
-        }
-        catch(SQLException |ClassNotFoundException | IllegalAccessException | InstantiationException e){
-           return false;
-        }
         //Delete 
         String requete = "DELETE FROM guns where idguns = ? ;";
         PreparedStatement pst=null;
@@ -231,26 +200,9 @@ public class SQLOrderGun {
     
     public static boolean AddGun(Gun gun)
     {
-        Connection conn = null; 
-        //Server url
-        String url = "jdbc:mysql://" + SERVERNAME + ":" + PORT + "/" + SCHEMA + PARAMETER;
+        JSONArray json = new JSONArray();
+        Connection conn = connectionBd();
         
-        //propreties for server
-        Properties properties = new Properties();
-        properties.setProperty("user", USERNAME);
-        properties.setProperty("password", PASSWORD);
-        properties.setProperty("useSSL", "false");
-        properties.setProperty("verifyServerCertificate", "true");
-        properties.setProperty("requireSSL", "false");
-
-        //Connect 
-        try{
-            Class.forName(DRIVER).newInstance();
-            conn = DriverManager.getConnection(url, properties);
-        }
-        catch(SQLException |ClassNotFoundException | IllegalAccessException | InstantiationException e){
-           return false;
-        }
         //ADD
         String requete = "INSERT INTO `guns` (`description`, `typeId`, `imageUrl`, `calibre`, `action`, `poids`) "
                 + "VALUES (?, ?, ?, ?, ?,?)";
@@ -282,26 +234,9 @@ public class SQLOrderGun {
     
         public static boolean UpdateGun(Gun gun)
     {
-        Connection conn = null; 
-        //Server url
-        String url = "jdbc:mysql://" + SERVERNAME + ":" + PORT + "/" + SCHEMA + PARAMETER;
+        JSONArray json = new JSONArray();
+        Connection conn = connectionBd();
         
-        //propreties for server
-        Properties properties = new Properties();
-        properties.setProperty("user", USERNAME);
-        properties.setProperty("password", PASSWORD);
-        properties.setProperty("useSSL", "false");
-        properties.setProperty("verifyServerCertificate", "true");
-        properties.setProperty("requireSSL", "false");
-
-        //Connect 
-        try{
-            Class.forName(DRIVER).newInstance();
-            conn = DriverManager.getConnection(url, properties);
-        }
-        catch(SQLException |ClassNotFoundException | IllegalAccessException | InstantiationException e){
-           return false;
-        }
         //ADD
         String requete = "UPDATE `guns` SET `description`= ?, `typeId`=?, `imageUrl`=?, `calibre`=?, `action`=?, `poids`=? "
                 +"WHERE idguns = ?";
@@ -332,32 +267,13 @@ public class SQLOrderGun {
         return true;
     }
         
-    public static List<String> GetType()
+    public static JSONArray GetType()
     {
-        List<String> types = null;
-        Connection conn = null; 
-        //Server url
-        String url = "jdbc:mysql://" + SERVERNAME + ":" + PORT + "/" + SCHEMA + PARAMETER;
+        JSONArray json = new JSONArray();
+        Connection conn = connectionBd();
         
-        //propreties for server
-        Properties properties = new Properties();
-        properties.setProperty("user", USERNAME);
-        properties.setProperty("password", PASSWORD);
-        properties.setProperty("useSSL", "false");
-        properties.setProperty("verifyServerCertificate", "true");
-        properties.setProperty("requireSSL", "false");
-
-        //Connect
-        try{
-            Class.forName(DRIVER).newInstance();
-            conn = DriverManager.getConnection(url, properties);
-        }
-        catch(SQLException |ClassNotFoundException | IllegalAccessException | InstantiationException e){
-            System.out.println(e);
-            System.exit(-1);
-        }
         //Select
-        String Requete = "SELECT description FROM types;";
+        String Requete = "SELECT idtype, description FROM types;";
         
         PreparedStatement pst=null;
         ResultSet rs = null;
@@ -370,7 +286,12 @@ public class SQLOrderGun {
             //Create Json
            while(rs.next())
            {
-                types.add(rs.getString("types.description"));
+                JSONObject jgun = new JSONObject();
+                
+                jgun.put("types_idtype",rs.getString("idtype"));
+                jgun.put("types_description",rs.getString("description"));
+                
+                json.put(jgun);
            }
            
           // Close ResultSet and PreparedStatement
@@ -378,7 +299,7 @@ public class SQLOrderGun {
          pst.close();
        
         }
-        catch(SQLException e){
+        catch(JSONException | SQLException e){
             System.out.println(e);
             System.exit(-1);
         }               
@@ -390,7 +311,7 @@ public class SQLOrderGun {
                System.exit(-1);
            }
         }
-            return types;
+        return json;
     }
 }
 

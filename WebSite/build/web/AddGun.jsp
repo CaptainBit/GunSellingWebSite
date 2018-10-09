@@ -1,10 +1,4 @@
 <%@page import="Guns.Gun"%>
-<%@page import="org.json.JSONException"%>
-<%@page import="org.json.JSONObject"%>
-<%@page import="java.sql.SQLException"%>
-<%@page import="java.sql.DriverManager"%>
-<%@page import="java.util.Properties"%>
-<%@page import="java.sql.ResultSet"%>
 <%@page import="java.sql.PreparedStatement"%>
 <%@page import="Guns.SQLOrderGun"%>
 

@@ -148,50 +148,26 @@
         $('document').ready(function(){
             ChangerTable(0); 
             
-            $.ajax({
-                    url: "./GetType",
-                    type: $(this).attr("method"),
-                    dataType: "JSON",
-                    data: new FormData(this).serialize(),
-                    processData: false,
-                    contentType: false,
-                    success: function (data, status)
+            $.getJSON("./GetType.jsp",null,function (data)
                     {
-                        $.each(items, function (i, item) {
-                            $('#idType').append($('<option>', { 
-                                text : item.text 
+                        $.each(data ,(i,item)=> {
+                            $('#editType').append(
+                                    $('<option>', {
+                                    text: item.types_description,
+                                    value: item.types_idtype
                                 }));
                             });
-                        alert(data);
-                    },
-                    error: function (xhr, desc, err)
-                    {
-                        alert(err);
-                    }
-                });
+                    });
             
             $(document).on("submit", "#formModal", function(event)
             {
                 event.preventDefault();
                 
                 var url=$(this).attr("action");
-                $.ajax({
-                    url: url,
-                    type: $(this).attr("method"),
-                    dataType: "text",
-                    processData: false,
-                    contentType: false,
-                    success: function (data, status)
-                    {
-                        
-                        alert(data);
-                    },
-                    error: function (xhr, desc, err)
-                    {
-                        alert(err);
-                    }
-                });        
-
+                
+                $.post(url, new FormData(this),(response)=>{
+                    console.log(response);
+                });      
             });            
         })
         
