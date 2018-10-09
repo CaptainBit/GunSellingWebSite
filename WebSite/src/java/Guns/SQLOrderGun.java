@@ -5,6 +5,7 @@ import java.sql.DriverManager;
 import java.sql.SQLException;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
+import java.util.List;
 import java.util.Properties;
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -329,6 +330,67 @@ public class SQLOrderGun {
            }
         }
         return true;
+    }
+        
+    public static List<String> GetType()
+    {
+        List<String> types = null;
+        Connection conn = null; 
+        //Server url
+        String url = "jdbc:mysql://" + SERVERNAME + ":" + PORT + "/" + SCHEMA + PARAMETER;
+        
+        //propreties for server
+        Properties properties = new Properties();
+        properties.setProperty("user", USERNAME);
+        properties.setProperty("password", PASSWORD);
+        properties.setProperty("useSSL", "false");
+        properties.setProperty("verifyServerCertificate", "true");
+        properties.setProperty("requireSSL", "false");
+
+        //Connect
+        try{
+            Class.forName(DRIVER).newInstance();
+            conn = DriverManager.getConnection(url, properties);
+        }
+        catch(SQLException |ClassNotFoundException | IllegalAccessException | InstantiationException e){
+            System.out.println(e);
+            System.exit(-1);
+        }
+        //Select
+        String Requete = "SELECT description FROM types;";
+        
+        PreparedStatement pst=null;
+        ResultSet rs = null;
+        try{
+            
+            pst = conn.prepareStatement(Requete, 1005, 1008);            
+            rs = pst.executeQuery();
+            pst.clearParameters();
+            
+            //Create Json
+           while(rs.next())
+           {
+                types.add(rs.getString("types.description"));
+           }
+           
+          // Close ResultSet and PreparedStatement
+         rs.close();
+         pst.close();
+       
+        }
+        catch(SQLException e){
+            System.out.println(e);
+            System.exit(-1);
+        }               
+        finally{
+           try{
+              conn.close();
+           }catch(SQLException e){
+               System.out.println(e);
+               System.exit(-1);
+           }
+        }
+            return types;
     }
 }
 

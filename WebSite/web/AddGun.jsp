@@ -10,6 +10,7 @@
 
 <%@page contentType="application/json"%>
 <%
+
     String item = request.getParameter("description");
     
     JSONObject json = new JSONObject(request.getParameter("gun"));
