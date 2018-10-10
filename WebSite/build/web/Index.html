@@ -23,7 +23,7 @@
             <nav class="navbar navbar-inverse" style="background-color:  #002868 ">
               <div class="container-fluid">
                 <div class="navbar-header">
-                  <a class="navbar-brand" onclick="ChangerTable(0)" href="#">Taste the freedom  <i class="fas fa-fighter-jet"></i></a>
+                  <a class="navbar-brand" onclick="ChangerTable({types_idtype : '0', types_description : 'Toutes les armes'})" href="#">Taste the freedom  <i class="fas fa-fighter-jet"></i></a>
                 </div>
                 <ul id="menuGuns" class="nav navbar-nav">
                 </ul>
@@ -146,14 +146,14 @@
         
         <script>
         $('document').ready(function(){
-            ChangerTable(0); 
+            ChangerTable({types_idtype : '0', types_description : 'Toutes les armes'}); 
             
             $.getJSON("./GetType.jsp",null,function (data)
                     {
                         $.each(data ,(i,item)=> {
                             //Remplis le menu par type guns
                             $('#menuGuns').append($('<li>').append(
-                                '<a href="#'+item.types_description+'" onclick="ChangerTable('+item.types_idtype+')">'+item.types_description+'</a>'
+                                "<a href='#"+ item.types_description + "' onclick='ChangerTable("+ JSON.stringify(item) +")'>"+item.types_description+"</a>"
                             ));
                     
                             //Ajoute les choix de type lors de la modification d'un item
@@ -197,18 +197,10 @@
         }
         
                     
-        function ChangerTable(idType){
-            $("#table-nom").text("Toutes les armes");
-            $.getJSON("./GetType.jsp",null,function (data)
-                    {
-                        $.each(data ,(i,item)=> {
-                            if(idType === item.types_idtype){
-                                $("#table-nom").text(item.types_description);
-                            }
-                        });
-                    });
+        function ChangerTable(type){
+            $("#table-nom").text(type.types_description);
             
-            $.getJSON("./Select.jsp",{"idType":idType},function(data){
+            $.getJSON("./Select.jsp",{"idType":type.types_idtype},function(data){
                 CreateTable(data);
             });
         }
