@@ -7,6 +7,7 @@
 <%@page import="java.sql.ResultSet"%>
 <%@page import="java.sql.PreparedStatement"%>
 <%@page import="Guns.SQLOrderGun"%>
+<%@ page trimDirectiveWhitespaces="true"%>
 
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <%
@@ -32,6 +33,8 @@
             poids =  Float.valueOf(request.getParameter("poids"));
         if(request.getParameter("type") != null && !request.getParameter("type").isEmpty())
             typeId = Integer.parseInt(request.getParameter("type"));
+        if(request.getParameter("image") != null && !request.getParameter("image").isEmpty())
+            imageUrl = request.getParameter("image");
         
     }catch(Exception e)
     {

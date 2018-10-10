@@ -7,6 +7,7 @@
 <%@page import="java.sql.ResultSet"%>
 <%@page import="java.sql.PreparedStatement"%>
 <%@page import="Guns.SQLOrderGun"%>
+<%@ page trimDirectiveWhitespaces="true"%>
 
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <%        
