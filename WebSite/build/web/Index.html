@@ -25,10 +25,7 @@
                 <div class="navbar-header">
                   <a class="navbar-brand" onclick="ChangerTable(0)" href="#">Taste the freedom  <i class="fas fa-fighter-jet"></i></a>
                 </div>
-                <ul class="nav navbar-nav">
-                    <li><a href="#Rifle" onclick="ChangerTable(1)">Rifle</a></li>
-                    <li><a href="#Pistol" onclick="ChangerTable(2)">Pistol</a></li>
-                    <li><a href="#Kids" onclick="ChangerTable(3)">Kids</a></li>
+                <ul id="menuGuns" class="nav navbar-nav">
                 </ul>
                 <div class="search-container">                  
                     <form class="navbar-form navbar-right" action="javascript:FindGun(search.value)" id="navBarSearchForm">
@@ -107,6 +104,7 @@
                           <h4 id="titreModal" class="modal-title">Sans nom</h4>
                         </div>
                         <div class="modal-body">
+                            <input id="editId" name="idItem" type="hidden" value="0">
                             <div class="form-group">
                                 <label>Nom</label>
                                 <input id="editNom" type="text" name="description" class="form-control" placeholder="Nom" required>
@@ -127,12 +125,14 @@
                             <div class="form-group">                            
                                 <label>Poids en gramme</label>                            
                                 <input id="editPoids" type="number" name="poids" class="form-control" placeholder="Poids">           
-                            </div>       
+                            </div>
+                            <!--
                             <div class="form-group">                            
                                 <label>Importer une image</label>
                                 <input id="editFile" type="file" name="image" class="form-control-file" 
                                        accept="image/png, image/jpeg">
                             </div>
+                            -->
                         </div>
                         <div class="modal-footer">
                           <button type="button" class="btn btn-default" data-dismiss="modal">Annuler</button>
@@ -151,6 +151,12 @@
             $.getJSON("./GetType.jsp",null,function (data)
                     {
                         $.each(data ,(i,item)=> {
+                            //Remplis le menu par type guns
+                            $('#menuGuns').append($('<li>').append(
+                                '<a href="#'+item.types_description+'" onclick="ChangerTable('+item.types_idtype+')">'+item.types_description+'</a>'
+                            ));
+                    
+                            //Ajoute les choix de type lors de la modification d'un item
                             $('#editType').append(
                                     $('<option>', {
                                     text: item.types_description,
@@ -192,21 +198,15 @@
         
                     
         function ChangerTable(idType){
-            //TODO Remplacer par les éléments de la BD types
-            switch(idType){
-                case 0:
-                    $("#table-nom").text("Toutes les armes");
-                    break;
-                case 1:
-                    $("#table-nom").text("Rifle");
-                    break;
-                case 2:
-                    $("#table-nom").text("Pistol");
-                    break;
-                case 3:
-                    $("#table-nom").text("Kids");
-                    break;
-            }
+            $("#table-nom").text("Toutes les armes");
+            $.getJSON("./GetType.jsp",null,function (data)
+                    {
+                        $.each(data ,(i,item)=> {
+                            if(idType === item.types_idtype){
+                                $("#table-nom").text(item.types_description);
+                            }
+                        });
+                    });
             
             $.getJSON("./Select.jsp",{"idType":idType},function(data){
                 CreateTable(data);
@@ -260,7 +260,7 @@
             $('#editAction').val(item.gun_action);
             $('#editCalibre').val(item.gun_calibre);
             $('#editPoids').val(item.gun_poids);
-            $('#editFile').val(item.gun_imageUrl);
+            $('#editId').val(item.gun_idguns);
         }
         
         function addItem(){
@@ -273,7 +273,6 @@
             $('#editAction').val("");
             $('#editCalibre').val("");
             $('#editPoids').val("");
-            $('#editFile').val("");
         }
         
         function CreateTable(data){

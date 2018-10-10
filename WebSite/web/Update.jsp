@@ -8,36 +8,42 @@
 <%@page import="java.sql.PreparedStatement"%>
 <%@page import="Guns.SQLOrderGun"%>
 
-<%@page contentType="application/json"%>
+<%@page contentType="text/html" pageEncoding="UTF-8"%>
 <%
-    JSONObject json = new JSONObject(request.getParameter("gun"));
-    
     //Valeur de gun
-    int idGun =0;
-    String description = null;
-    String imageUrl= null;
+    String description = "";
+    String imageUrl= "";
     int typeId= 0;
-    String calibre= null;
-    String action= null;
+    String calibre= "";
+    String action= "";
     float poids= 0;
-    
+    int idGun = 0;
     
     try
     {
-        idGun = json.getInt("gun_idguns");
-        description = json.getString("gun_description");
-        imageUrl = json.getString("gun_imageUrl");
-        calibre = json.getString("gun_calibre");
-        action = json.getString("gun_action");
-        poids = (float)json.getLong("gun_poids");
-        typeId = json.getInt("gun_typeId");
-    }catch(JSONException e)
+        idGun = Integer.parseInt(request.getParameter("idItem"));
+        if(request.getParameter("description") != null && !request.getParameter("description").isEmpty())
+            description = request.getParameter("description");
+        if(request.getParameter("calibre") != null && !request.getParameter("calibre").isEmpty())
+            calibre = request.getParameter("calibre");
+        if(request.getParameter("action") != null && !request.getParameter("action").isEmpty())
+            action = request.getParameter("action");
+        if(request.getParameter("poids") != null && !request.getParameter("poids").isEmpty())
+            poids =  Float.valueOf(request.getParameter("poids"));
+        if(request.getParameter("type") != null && !request.getParameter("type").isEmpty())
+            typeId = Integer.parseInt(request.getParameter("type"));
+        
+    }catch(Exception e)
     {
         System.out.println(e);
-        System.exit(-1);
     }
     Gun gunToUpdate = new Gun(idGun,description, typeId, imageUrl, calibre, action, poids);
-    SQLOrderGun.UpdateGun(gunToUpdate);
+    
+    if(SQLOrderGun.UpdateGun(gunToUpdate)){
+        out.print("L'édition de " + description + " avec succès");
+    }else{
+        out.print("Échec");
+    };
     
  
 %>
