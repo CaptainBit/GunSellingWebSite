@@ -6,7 +6,8 @@ $('document').ready(function(){
                         $.each(data ,(i,item)=> {
                             //Remplis le menu par type guns
                             $('#menuGuns').append($('<li>').append(
-                                "<a href='#"+ item.types_description + "' onclick='ChangerTable("+ JSON.stringify(item) +")'>"+item.types_description+"</a>"
+                                "<a href='#"+ item.types_description + "' onclick='ChangerTable("
+                                + JSON.stringify(item) +")'>"+item.types_description+"</a>"
                             ));
                     
                             //Ajoute les choix de type lors de la modification d'un item
@@ -132,8 +133,10 @@ $('document').ready(function(){
                 data.forEach(function(item){
                     Table += "<tr onclick='ChangerImage("+ JSON.stringify(item)+")'>" +
                     "<td>"+item.gun_description+"</td><td>"+item.types_description+
-                    "</td><td class='text-right'><a href='#' onclick='editItem("+ JSON.stringify(item)+")' title='Edit'><i class='fas fa-edit fa-lg fa-fw'></i></a>" +
-                    "<a href='#' onclick='deleteItem("+ item.gun_idguns+")' title='Delete'><i class='fas fa-trash-alt fa-lg fa-fw'></i></a></td></tr>";
+                    "</td><td class='text-right'><a href='#' onclick='editItem("+ 
+                    JSON.stringify(item)+")' title='Edit'><i class='fas fa-edit fa-lg fa-fw'></i></a>"
+                    + "<a href='#' onclick='deleteItem("+ item.gun_idguns
+                    +")' title='Delete'><i class='fas fa-trash-alt fa-lg fa-fw'></i></a></td></tr>";
                 });        
 
                 Table += "</tbody>";
