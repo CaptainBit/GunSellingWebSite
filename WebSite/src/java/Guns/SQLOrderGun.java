@@ -83,10 +83,12 @@ public class SQLOrderGun {
            while(rs.next())
            {
                 JSONObject jgun = new JSONObject();
+                
                 jgun.put("gun_idguns",rs.getString("guns.idguns"));
                 jgun.put("gun_description",rs.getString("guns.description"));
                 jgun.put("gun_imageUrl",rs.getString("guns.imageUrl"));
                 jgun.put("types_description", rs.getString("types.description"));
+                jgun.put("types_idtype", rs.getString("types.idtype"));
                 jgun.put("gun_calibre", rs.getString("guns.calibre"));
                 jgun.put("gun_action", rs.getString("guns.action"));
                 jgun.put("gun_poids", rs.getString("guns.poids"));
@@ -137,14 +139,16 @@ public class SQLOrderGun {
            while(rs.next())
            {
                 JSONObject jgun = new JSONObject();
+                
                 jgun.put("gun_idguns",rs.getString("guns.idguns"));
                 jgun.put("gun_description",rs.getString("guns.description"));
                 jgun.put("gun_imageUrl",rs.getString("guns.imageUrl"));
                 jgun.put("types_description", rs.getString("types.description"));
+                jgun.put("types_idtype", rs.getString("types.idtype"));
                 jgun.put("gun_calibre", rs.getString("guns.calibre"));
                 jgun.put("gun_action", rs.getString("guns.action"));
                 jgun.put("gun_poids", rs.getString("guns.poids"));
-                
+
                 json.put(jgun);
 
            }

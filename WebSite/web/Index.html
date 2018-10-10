@@ -172,8 +172,8 @@
                 var url=$(this).attr("action");
                 
                 $.post(url, $('#formModal').serialize(),(response)=>{
-                    alert(response);       
-                    location.reload();
+                    alert(response);    
+                    ChangerTable(JSON.parse(sessionStorage.getItem("typeGun")));
                 });      
             });            
         })
@@ -203,6 +203,8 @@
             $.getJSON("./Select.jsp",{"idType":type.types_idtype},function(data){
                 CreateTable(data);
             });
+            
+                sessionStorage.setItem("typeGun", JSON.stringify(type));
         }
         function FindGun(name)
         {
@@ -233,22 +235,22 @@
         function checkNull(value){
             return typeof value !== "undefined" && value !== null && value !== "0.0" && value !== "";
         }
+        
         function deleteItem(idGun)
         {
              $.post("./Delete.jsp",{"idGun":idGun},function(data){
                 alert(data);       
-                location.reload();               
+                ChangerTable(JSON.parse(sessionStorage.getItem("typeGun")));
             });
         }
         
         function editItem(item){
-            console.log(item);
             $("#myModal").modal();
             $('#titreModal').text("Modifier " + item.gun_description);
             $('#formModal').attr('action','./Update.jsp');
             
             $('#editNom').val(item.gun_description);
-            $('#editType').val(item.types_description);
+            $('#editType').val(item.types_idtype);
             $('#editAction').val(item.gun_action);
             $('#editCalibre').val(item.gun_calibre);
             $('#editPoids').val(item.gun_poids);
